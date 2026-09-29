@@ -30,6 +30,7 @@ Cualquier agente (Claude Code, Claude con MCP de Figma, otros) debe leer este ar
 npm run check      # tokens + validación + generación + lint de consumo
 npm run dev        # landing en http://localhost:4321
 npm run dev:webapp # webapp Next.js en http://localhost:3000
+npm run test       # pruebas de accesibilidad: axe sobre examples y props + cada MUST de specs/requirements (ADR-0006)
 npm run diff       # clasificación semver contra origin/main
 npm run coherence  # informe de deriva contrato ↔ código ↔ Figma (ADR-0004)
 npm run roundtrip / roundtrip:tokens   # Figma vs contrato (componentes / variables)

@@ -5,12 +5,17 @@ import { header, type HeaderContract } from '@ds-ia/core';
 interface Props extends HeaderContract {
   links: { label: string; href: string }[];
   homeHref?: string;
+  /** Destino del enlace "Saltar al contenido": el id del <main> de la página. */
+  skipTo?: string;
 }
-const { links, homeHref = '#top' } = Astro.props;
+const { links, homeHref = '#top', skipTo = '#contenido' } = Astro.props;
+// Requisito header#3: el primer elemento enfocable de la página es "Saltar al contenido". Solo se ve al recibir foco.
+const skipLink = 'sr-only focus:not-sr-only focus:block focus:bg-surface-strong focus:text-primary focus:p-inset-md focus:rounded-interactive';
 const c = header(Astro.props);
 ---
 
 <header class={c.root}>
+  <a class={skipLink} href={skipTo}>Saltar al contenido</a>
   <div class={c.inner}>
     <a class={c.brand} href={homeHref}><slot name="brand" /></a>
     <!-- extension: responsive. El contrato aún no expresa breakpoints (ver ADR-0003, "Otras consideraciones"). -->

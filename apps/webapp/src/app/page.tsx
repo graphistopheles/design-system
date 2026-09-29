@@ -27,7 +27,7 @@ export default function Page() {
         }
       />
 
-      <main className="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-2xl">
+      <main id="contenido" className="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-2xl">
         <section aria-labelledby="resumen" className="flex flex-col gap-stack-xl">
           <div className="flex flex-col gap-stack-md items-start">
             <Badge tone="category" category="prototype">

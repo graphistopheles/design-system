@@ -38,6 +38,20 @@ add({ surface: 'Código', check: 'Código generado al día con el contrato', sta
 r = node('scripts/lint-consumption.mjs');
 add({ surface: 'Código', check: 'Superficies de código usan solo tokens semánticos', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'violacion', action: 'Reemplazar el valor suelto por un token semántico; si falta, proponerlo con ADR (ds-code-to-specs)' });
 
+// ---------- 4b. Pruebas de accesibilidad de los andamios (axe + requisitos MUST, ADR-0006) ----------
+{
+  const bin = path.join(ROOT, 'node_modules/vitest/vitest.mjs');
+  if (!fs.existsSync(bin)) {
+    add({ surface: 'Código', check: 'Pruebas de accesibilidad de los andamios', status: 'skip', detail: 'no medido: vitest no está instalado (npm install)', drift: null, action: '' });
+  } else {
+    const t = spawnSync(process.execPath, [bin, 'run'], { cwd: path.join(ROOT, 'packages/ui-react'), encoding: 'utf8' });
+    const out = `${t.stdout ?? ''}${t.stderr ?? ''}`.replace(/\x1b\[[0-9;]*m/g, '');
+    const resumen = (out.match(/^\s*Tests\s+(.+)$/m) ?? [])[1]?.trim() ?? '';
+    const fallos = out.split('\n').filter((l) => /^\s+×|^\s+→/.test(l)).map((l) => l.trim()).slice(0, 12).join('\n');
+    add({ surface: 'Código', check: 'Pruebas de accesibilidad de los andamios (axe + requisitos MUST)', status: t.status === 0 ? 'ok' : 'fail', detail: t.status === 0 ? resumen : fallos || tail(out, 8), drift: 'codigo-adelantado', action: 'Un andamio (Astro o React) ya no cumple un requisito del contrato: corregir el andamio o, si el requisito cambió, actualizar specs/requirements y las pruebas (packages/ui-react/tests)' });
+  }
+}
+
 // ---------- 5. Semver contra la base ----------
 let contractChanged = false;
 if (base) {
