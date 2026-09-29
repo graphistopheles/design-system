@@ -3,6 +3,7 @@
 // contrato: nombres de token (color.bg.fill-primary), no valores. Un valor sin variable sale como "raw:<valor>" (valor suelto).
 //
 //   mode "hashes" (por defecto): { sets: [{ name, id, version, defs, layers, alt, h }] }  -> entrada de scripts/figma-roundtrip.mjs
+//   mode "digest": { digests: { <set>: hash } }  -> ~100 bytes; si coincide con el de la última extracción completa, esa extracción sigue vigente
 //   mode "drill":  args { set, variant, path }  -> hechos completos de una capa, para ver qué difiere.
 //   args.only?: ["Button", ...] limita los sets.
 //
@@ -112,5 +113,9 @@ for (const s of sets) {
     h[v.name] = (await Promise.all(ls.map(async (l) => (l.kind === 'instance' || l.kind === 'shape' || l.kind === 'other') ? '-' : hash(canon(await factsOf(l.node, l.kind)))))).join(',');
   }
   result.push({ name: s.name, id: s.id, version: s.getPluginData('specVersion'), defs, layers, alt, h });
+}
+if (mode === 'digest') {
+  const cd = (v) => (Array.isArray(v) ? '[' + v.map(cd).join(',') + ']' : v && typeof v === 'object' ? '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + cd(v[k])).join(',') + '}' : JSON.stringify(v));
+  return { digests: Object.fromEntries(result.map((x) => [x.name, hash(cd({ defs: x.defs, layers: x.layers, alt: x.alt, h: x.h }))])) };
 }
 return { sets: result };

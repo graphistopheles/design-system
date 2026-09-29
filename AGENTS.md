@@ -30,6 +30,8 @@ Cualquier agente (Claude Code, Claude con MCP de Figma, otros) debe leer este ar
 npm run check      # tokens + validación + generación + lint de consumo
 npm run dev        # landing en http://localhost:4321
 npm run diff       # clasificación semver contra origin/main
+npm run coherence  # informe de deriva contrato ↔ código ↔ Figma (ADR-0004)
+npm run roundtrip / roundtrip:tokens   # Figma vs contrato (componentes / variables)
 node scripts/generate-components.mjs --check   # ¿lo generado está al día?
 ```
 
@@ -41,3 +43,4 @@ node scripts/generate-components.mjs --check   # ¿lo generado está al día?
 | Specs → Figma | `.claude/skills/ds-specs-to-figma` | Requiere MCP de Figma con escritura (`use_figma`) |
 | Código → specs | `.claude/skills/ds-code-to-specs` | Listo |
 | Nuevo componente | `.claude/skills/ds-new-component` | Listo |
+| Coherencia (los cuatro bordes a la vez) | `.claude/skills/ds-guardian` · `npm run coherence` | Listo · regla de precedencia en ADR-0004 (propuesto) |

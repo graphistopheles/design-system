@@ -58,4 +58,4 @@ Cambia `brand.500` en `specs/tokens/primitives/color.json` y ejecuta `npm run de
 1. Subir el repo a GitHub y activar Actions y Pages.
 2. Preparar Figma según `figma/README.md` y ejecutar el borde specs → Figma.
 3. Round trip specs → Figma → specs con diff vacío.
-4. Modo Dark (`specs/tokens/semantic/color.dark.json`) y responsive en el contrato (ADR-0004).
+4. Modo Dark (`specs/tokens/semantic/color.dark.json`) y responsive en el contrato (ADR-0005).

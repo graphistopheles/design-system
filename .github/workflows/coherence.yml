@@ -1,0 +1,37 @@
+# Informe de coherencia en cada PR (parte determinística del agente ds-guardian, ADR-0004).
+# En CI solo se mide el lado repo (contrato + código). Figma sale como "no medido": requiere una sesión con el plugin,
+# que corre el agente en local (ver .claude/skills/ds-guardian).
+name: Coherence
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  coherence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Informe de coherencia (contrato y código; Figma no se mide en CI)
+        run: npm run coherence -- --ci --base origin/${{ github.base_ref || 'main' }}
+
+      - name: Comentar el informe en el PR
+        if: github.event_name == 'pull_request' && always()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: coherence
+          path: coherence-report.md
