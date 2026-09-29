@@ -2,7 +2,7 @@
   "name": "ds-ia",
   "private": true,
   "version": "0.1.0",
-  "description": "Prueba de concepto: sistema de diseño spec-driven conectado a Figma y a una landing Astro + Tailwind",
+  "description": "Prueba de concepto: sistema de diseño spec-driven conectado a Figma, con una landing Astro y una webapp Next.js",
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -24,7 +24,9 @@
     "preview": "npm run preview -w @ds-ia/landing",
     "roundtrip": "node scripts/figma-roundtrip.mjs",
     "roundtrip:tokens": "node scripts/figma-roundtrip-tokens.mjs",
-    "coherence": "node scripts/coherence.mjs"
+    "coherence": "node scripts/coherence.mjs",
+    "dev:webapp": "npm run tokens && npm run generate && npm run dev -w @ds-ia/webapp",
+    "build:webapp": "npm run check && npm run build -w @ds-ia/webapp"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

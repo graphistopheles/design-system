@@ -3,7 +3,7 @@
 Prueba de concepto de un sistema de diseño en el que **Figma y el código leen el mismo contrato**. El repositorio no es "la" fuente de verdad: es el hub donde la intención que nace en Figma o en código se normaliza, se valida y se versiona. Los agentes traducen entre superficies y el CI verifica que nada se pierda.
 
 ```
-Figma (variables + componentes) ◀──agente──▶ /specs (HUB) ──script──▶ Landing Astro + Tailwind v4
+Figma (variables + componentes) ◀──agente──▶ /specs (HUB) ──script──▶ Landing Astro · Webapp Next.js (Tailwind v4)
                                              tokens DTCG · contratos · requisitos · ADRs
 ```
 
@@ -18,6 +18,8 @@ npm install
 npm run dev        # genera tokens y contratos, y abre la landing en http://localhost:4321
 npm run check      # tokens + validación + generación + lint de consumo
 npm run build      # check + build estático en apps/landing/dist
+npm run dev:webapp  # genera tokens y contratos, y abre la webapp Next.js en http://localhost:3000
+npm run build:webapp # check + build de la webapp
 ```
 
 ## Estructura
@@ -31,8 +33,10 @@ specs/                     ← HUB: lo único que se edita como contrato
   schema/                  JSON Schema del contrato
   adr/                     decisiones de arquitectura (formato de 7 partes)
 packages/tokens/           build determinístico → dist/ tokens.css · theme.css · tokens.js · tokens.json · figma-variables.json
+packages/ui-core/           GENERADO desde los specs: contratos TS + mapas de clases (sin framework, no editar)
+packages/ui-react/          andamios React sobre ui-core: HTML, semántica y a11y (ADR-0006)
 apps/landing/              landing Astro + Tailwind v4 que consume solo componentes y tokens semánticos
-  src/components/generated/  GENERADO desde los specs (no editar)
+apps/webapp/               webapp Next.js (App Router) + Tailwind v4 sobre @ds-ia/react (mini dashboard)
 scripts/                   validar · generar · lint de consumo · semver diff
 figma/                     cómo preparar Figma para el hub
 .claude/skills/            skills de agente para los cuatro bordes

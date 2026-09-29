@@ -1,0 +1,20 @@
+{
+  "name": "@ds-ia/react",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Andamios React sobre @ds-ia/core: estructura HTML, semántica y accesibilidad de cada contrato. Sin estilos propios.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@ds-ia/core": "*"
+  },
+  "peerDependencies": {
+    "react": ">=18.3"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0"
+  }
+}

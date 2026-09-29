@@ -36,7 +36,7 @@ r = node('scripts/generate-components.mjs', '--check');
 add({ surface: 'Código', check: 'Código generado al día con el contrato', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'superficie-atrasada', action: '`npm run generate`; si alguien editó un archivo generado a mano, se revierte y se regenera' });
 
 r = node('scripts/lint-consumption.mjs');
-add({ surface: 'Código', check: 'Landing usa solo tokens semánticos', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'violacion', action: 'Reemplazar el valor suelto por un token semántico; si falta, proponerlo con ADR (ds-code-to-specs)' });
+add({ surface: 'Código', check: 'Superficies de código usan solo tokens semánticos', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'violacion', action: 'Reemplazar el valor suelto por un token semántico; si falta, proponerlo con ADR (ds-code-to-specs)' });
 
 // ---------- 5. Semver contra la base ----------
 let contractChanged = false;

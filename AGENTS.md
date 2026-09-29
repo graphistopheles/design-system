@@ -11,9 +11,9 @@ Cualquier agente (Claude Code, Claude con MCP de Figma, otros) debe leer este ar
 | `specs/requirements/*.md` | Requisitos redactados (MUST/SHOULD) | Sí, vía PR |
 | `specs/adr/*.md` | Decisiones de arquitectura | Sí, vía PR |
 | `packages/tokens/dist/**` | CSS, tema Tailwind, TS, JSON para Figma | **No**: `npm run tokens` |
-| `apps/landing/src/components/generated/**` | Contratos TS y clases | **No**: `npm run generate` |
-| `apps/landing/src/components/*.astro` | Scaffolds: HTML, semántica, a11y | Sí |
-| `apps/landing/src/sections/**` | Capa "extensions" | Sí, pasa por el lint de consumo |
+| `packages/ui-core/src/**` | Contratos TS y clases (sin framework) | **No**: `npm run generate` |
+| `apps/landing/src/components/*.astro`, `packages/ui-react/src/*.tsx` | Andamios por framework: HTML, semántica, a11y (ADR-0006) | Sí |
+| `apps/landing/src/sections/**`, `apps/webapp/src/**` | Capa "extensions" | Sí, pasa por el lint de consumo |
 
 ## Reglas no negociables
 1. **Un componente nunca consume un primitivo.** Si ningún semántico resuelve el caso, crea el semántico en `specs/tokens/semantic/` y, si cambia la arquitectura, escribe un ADR (`specs/adr/_plantilla.md`).
@@ -29,6 +29,7 @@ Cualquier agente (Claude Code, Claude con MCP de Figma, otros) debe leer este ar
 ```bash
 npm run check      # tokens + validación + generación + lint de consumo
 npm run dev        # landing en http://localhost:4321
+npm run dev:webapp # webapp Next.js en http://localhost:3000
 npm run diff       # clasificación semver contra origin/main
 npm run coherence  # informe de deriva contrato ↔ código ↔ Figma (ADR-0004)
 npm run roundtrip / roundtrip:tokens   # Figma vs contrato (componentes / variables)
