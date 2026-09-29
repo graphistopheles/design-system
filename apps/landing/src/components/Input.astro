@@ -9,6 +9,8 @@ interface Props extends InputContract {
 }
 const { class: extensions, label, name, type = 'text', placeholder, helper, invalid = false, required = false, disabled = false, autocomplete } =
   Astro.props;
+// Requisito input#6: type y autocomplete correctos. Si no se indica, se deduce del type cuando hay un valor estándar.
+const autocompleteByType: Record<string, string> = { email: 'email', url: 'url' };
 const id = Astro.props.id ?? `field-${name}`;
 const helperId = helper ? `${id}-helper` : undefined;
 const c = input(Astro.props);
@@ -24,7 +26,7 @@ const c = input(Astro.props);
     placeholder={placeholder}
     required={required}
     disabled={disabled}
-    autocomplete={autocomplete}
+    autocomplete={autocomplete ?? autocompleteByType[type]}
     aria-invalid={invalid ? 'true' : undefined}
     aria-describedby={helperId}
   />

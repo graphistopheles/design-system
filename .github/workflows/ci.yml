@@ -42,6 +42,9 @@ jobs:
       - name: Build de la webapp (Next.js)
         run: npm run build -w @ds-ia/webapp
 
+      - name: Pruebas de accesibilidad (axe + requisitos MUST de los contratos)
+        run: npm run test -w @ds-ia/react
+
       - name: Clasificación semver
         if: github.event_name == 'pull_request'
         run: node scripts/spec-diff.mjs origin/${{ github.base_ref }}

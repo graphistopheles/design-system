@@ -26,7 +26,8 @@
     "roundtrip:tokens": "node scripts/figma-roundtrip-tokens.mjs",
     "coherence": "node scripts/coherence.mjs",
     "dev:webapp": "npm run tokens && npm run generate && npm run dev -w @ds-ia/webapp",
-    "build:webapp": "npm run check && npm run build -w @ds-ia/webapp"
+    "build:webapp": "npm run check && npm run build -w @ds-ia/webapp",
+    "test": "npm run tokens && npm run generate && npm run test -w @ds-ia/react"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
