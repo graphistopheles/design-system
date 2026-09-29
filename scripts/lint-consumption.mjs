@@ -5,8 +5,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, loadTokens } from './lib/specs.mjs';
 
-const SRC = path.join(ROOT, 'apps/landing/src');
-const IGNORE = [path.join(SRC, 'components/generated')];
+// Superficies de código escritas a mano (los mapas de clases de ui-core son generados y no se lintean).
+const SURFACES = ['apps/landing/src', 'apps/webapp/src', 'packages/ui-react/src'].map((p) => path.join(ROOT, p)).filter((p) => fs.existsSync(p));
+const IGNORE = [];
 const EXT = /\.(astro|ts|tsx|js|mjs|css)$/;
 
 const primitives = new Set(loadTokens().list.filter((t) => t.tier === 'primitive').map((t) => t.name));
@@ -29,7 +30,7 @@ const walk = (dir) =>
   });
 
 const problems = [];
-for (const file of walk(SRC)) {
+for (const file of SURFACES.flatMap((s) => walk(s))) {
   const lines = fs.readFileSync(file, 'utf8').split('\n');
   lines.forEach((line, i) => {
     // Texto dentro de <code> es contenido (documentación), no estilo.
@@ -48,4 +49,4 @@ if (problems.length) {
   console.error(`\n${problems.length} problema(s) de consumo de tokens.`);
   process.exit(1);
 }
-console.log('✔ Consumo de tokens: solo semánticos en la landing');
+console.log('✔ Consumo de tokens: solo semánticos en las superficies de código');
