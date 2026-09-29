@@ -5,6 +5,8 @@ import { resolve } from './_runtime';
 /** Agrupa contenido relacionado sobre una superficie delimitada para escanearlo como una unidad. */
 export interface CardContract {
   padding?: 'md' | 'lg';
+  /** auto se ajusta al contenido; full ocupa todo el ancho de su contenedor (reemplaza a class="w-full"). */
+  width?: 'auto' | 'full';
   /** Toda la card es un enlace (requiere href). */
   interactive?: boolean;
   href?: string;
@@ -13,9 +15,9 @@ export interface CardContract {
 /** Slots de contenido: eyebrow, title (requerido), description, footer */
 export type CardPart = 'root' | 'eyebrow' | 'title' | 'description' | 'footer';
 
-export const cardMeta = {"name":"Card","version":"1.0.0","status":"stable","level":"molecule","spec":"specs/components/card.spec.json"} as const;
+export const cardMeta = {"name":"Card","version":"1.1.0","status":"stable","level":"molecule","spec":"specs/components/card.spec.json"} as const;
 
-export const cardDefaults = {"padding":"lg","interactive":false} as const;
+export const cardDefaults = {"padding":"lg","width":"auto","interactive":false} as const;
 
 export const cardStyles = {
   "parts": [
@@ -37,6 +39,14 @@ export const cardStyles = {
       },
       "lg": {
         "root": "p-inset-lg"
+      }
+    },
+    "width": {
+      "auto": {
+        "root": "w-auto"
+      },
+      "full": {
+        "root": "w-full"
       }
     },
     "interactive": {

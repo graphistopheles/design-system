@@ -130,7 +130,7 @@ const build = async (c) => {
   const frameSizing = (node, st, parent, isRoot) => {
     const L = st.layout || {};
     if (isRoot) {
-      if (opts.rootWidth) node.resize(opts.rootWidth, node.height); // ancho de trabajo del frame en el lienzo
+      if (L.width === 'full' && opts.rootWidth) node.resize(opts.rootWidth, node.height); // width: full = ocupa su contenedor; en el lienzo se muestra al ancho de trabajo
     } else if (L.width === 'full' || st['max-width']) {
       node.layoutSizingHorizontal = 'FILL';
     }

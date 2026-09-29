@@ -1,13 +1,13 @@
 {
   "$schema": "../schema/component.schema.json",
   "name": "Card",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "stable",
   "level": "molecule",
   "purpose": "Agrupa contenido relacionado sobre una superficie delimitada para escanearlo como una unidad.",
   "figma": {
     "component": "Card",
-    "nodeId": "1:2115"
+    "nodeId": "6:216"
   },
   "props": {
     "padding": {
@@ -17,6 +17,15 @@
         "lg"
       ],
       "default": "lg"
+    },
+    "width": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "full"
+      ],
+      "default": "auto",
+      "description": "auto se ajusta al contenido; full ocupa todo el ancho de su contenedor (reemplaza a class=\"w-full\")."
     },
     "interactive": {
       "type": "boolean",
@@ -106,6 +115,22 @@
       "lg": {
         "root": {
           "padding": "space.inset.lg"
+        }
+      }
+    },
+    "width": {
+      "auto": {
+        "root": {
+          "layout": {
+            "width": "auto"
+          }
+        }
+      },
+      "full": {
+        "root": {
+          "layout": {
+            "width": "full"
+          }
         }
       }
     },

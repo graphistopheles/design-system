@@ -52,6 +52,7 @@ const factsOf = async (n, kind) => {
   }
   // frame
   f.dir = n.layoutMode; f.align = n.counterAxisAlignItems; f.justify = n.primaryAxisAlignItems;
+  f.w = n.layoutSizingHorizontal; // FIXED (raíz con width: full) · FILL (hijo con width: full o max-width) · HUG
   if (n.layoutWrap === 'WRAP') f.wrap = true;
   const fl = n.fills.filter((p) => p.visible !== false);
   if (fl[0]) f.background = paintFact(fl[0]);

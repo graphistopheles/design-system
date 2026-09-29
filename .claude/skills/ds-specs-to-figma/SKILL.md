@@ -24,6 +24,7 @@ Requiere el MCP remoto de Figma con escritura (`use_figma`) y cargar antes las s
    - Cada texto/slot es una propiedad TEXT con el nombre de la capa; cada parte `optional` es una propiedad BOOLEAN `show-<parte>`.
    - Capas con los nombres de `anatomy`. Fills, strokes, padding, gap, radio, altura y max-width ligados a variables **Semantic**; tipografía → text style; `shadow.*` → effect style.
    - `outline` (foco) se emula con un DROP_SHADOW sin desenfoque cuyo color y grosor van ligados a variables (Figma no tiene outline).
+   - Ancho: `layout.width: full` → en la raíz, se fija al ancho de trabajo (`opts.rootWidth`, p. ej. 360); en un hijo, `FILL`. Sin `width: full` la raíz se ajusta al contenido (`HUG`). Una prop `width: auto | full` es por tanto una propiedad de variante; el ancho es un hecho que el round trip compara (`w`).
    - Sin equivalente en Figma, se ignoran: `z-index`, `position: sticky`, `transition`, `cursor`.
    - `line-height` y `letter-spacing` de los text styles llevan el valor en %, sin ligar (Figma interpreta esas variables como px). La fuente es `Inter` (Figma no tiene `Inter Variable`).
 6. **Round trip**: ejecuta `ds-figma-to-specs` sobre lo creado y compara. El diff debe estar vacío.
