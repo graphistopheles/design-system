@@ -73,8 +73,16 @@ const figmaLeg = (label, inputFile, script) => {
   if (fs.statSync(p).mtimeMs < specsNewest) return add({ surface: 'Figma', check: label, status: 'skip', detail: 'desactualizado: los specs cambiaron después de la última lectura de Figma', drift: null, action: 'Volver a ejecutar el extractor en Figma' });
   const res = node(script);
   if (res.code === 2) return add({ surface: 'Figma', check: label, status: 'skip', detail: tail(res.out, 2), drift: null, action: 'Completar la entrada del extractor' });
-  const drift = contractChanged ? 'superficie-atrasada o conflicto' : 'figma-adelantado';
-  add({ surface: 'Figma', check: label, status: res.code === 0 ? 'ok' : 'fail', detail: res.code === 0 ? tail(res.out, 1) : tail(res.out, 10), drift, action: contractChanged ? 'El contrato cambió en esta rama y Figma difiere: regenerar Figma (ds-specs-to-figma) o, si diseño tocó lo mismo, escalar como conflicto' : 'Figma cambió sin que el contrato lo sepa: si es su origen natural (ADR-0004 §5.1) llevarlo al contrato con `roundtrip:tokens --apply` o ds-figma-to-specs' });
+  // Con la comparación a tres bandas (base · contrato · Figma) cada variable trae su clase; si no la hay (componentes) se usa la heurística.
+  const classes = [...new Set([...res.out.matchAll(/clase: ([\w-]+)/g)].map((m) => m[1]))];
+  const drift = classes.includes('conflicto') ? 'conflicto' : classes.length === 1 ? classes[0] : classes.length ? classes.join(' + ') : contractChanged ? 'superficie-atrasada o conflicto' : 'figma-adelantado';
+  const ACTIONS = {
+    conflicto: 'ESCALAR: etiqueta `needs-decision`; no aplicar ni regenerar. Resumen con base, contrato y Figma (formato en ds-guardian) y decide una persona (ADR-0004 §5.2)',
+    'superficie-atrasada': 'Solo cambió el contrato: regenerar Figma con ds-specs-to-figma',
+    'figma-adelantado': 'Figma cambió sin que el contrato lo sepa: si es su origen natural (ADR-0004 §5.1) llevarlo al contrato con `roundtrip:tokens --apply` o ds-figma-to-specs',
+  };
+  const action = ACTIONS[drift] ?? (contractChanged ? 'El contrato cambió en esta rama y Figma difiere: regenerar Figma (ds-specs-to-figma) o, si diseño tocó lo mismo, escalar como conflicto' : ACTIONS['figma-adelantado']);
+  add({ surface: 'Figma', check: label, status: res.code === 0 ? 'ok' : 'fail', detail: res.code === 0 ? tail(res.out, 1) : tail(res.out, 14), drift, action });
 };
 figmaLeg('Componentes de Figma vs contrato', '.roundtrip-input.json', 'scripts/figma-roundtrip.mjs');
 figmaLeg('Variables de Figma vs contrato', '.roundtrip-tokens.json', 'scripts/figma-roundtrip-tokens.mjs');
