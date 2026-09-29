@@ -49,10 +49,11 @@ if (base) {
 
 // ---------- 6. Extensiones repetidas en la landing (informativo) ----------
 {
-  const files = ['sections', 'pages', 'layouts'].flatMap((d) => { const p = path.join(ROOT, 'apps/landing/src', d); return fs.existsSync(p) ? fs.readdirSync(p).map((f) => path.join(p, f)) : []; }).filter((f) => f.endsWith('.astro'));
+  // Superficies escritas a mano: .astro de la landing (class) y .tsx de la webapp (className).
+  const walk = (d) => (fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])) : []);
+  const files = [...walk(path.join(ROOT, 'apps/landing/src')), ...walk(path.join(ROOT, 'apps/webapp/src'))].filter((f) => /.(astro|tsx)$/.test(f) && !f.includes(`${path.sep}components${path.sep}`));
   const seen = new Map();
-  for (const f of files) for (const m of fs.readFileSync(f, 'utf8').matchAll(/<(Button|Badge|Card|Input|Header)\b[^>]*?\bclass="([^"]+)"/g)) {
-    for (const cls of m[2].split(/\s+/)) seen.set(`${m[1]} · ${cls}`, (seen.get(`${m[1]} · ${cls}`) ?? 0) + 1);
+  for (const f of files) for (const m of fs.readFileSync(f, 'utf8').matchAll(/<(Button|Badge|Card|Input|Header)[^>]*?class(?:Name)?="([^"]+)"/g)) {
   }
   const repeated = [...seen].filter(([, n]) => n >= 2);
   add({ surface: 'Código', check: 'Extensiones repetidas sobre componentes del sistema', status: 'ok', detail: repeated.length ? `candidatas a variante o prop: ${repeated.map(([k, n]) => `${k} ×${n}`).join(', ')}` : 'ninguna', info: repeated.length > 0, drift: repeated.length ? 'codigo-adelantado' : null, action: repeated.length ? 'Evaluar con ds-code-to-specs si merece variante o prop en el contrato' : '' });
