@@ -7,11 +7,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, loadSpecs } from './lib/specs.mjs';
-import { expectedFacts, hashFacts, parseVariant } from './lib/figma-projection.mjs';
+import { expectedFacts, hashFacts, parseVariant, hash } from './lib/figma-projection.mjs';
 
-const input = process.argv[2] ?? path.join(ROOT, 'scripts/figma/.roundtrip-input.json');
+const flagArgs = process.argv.slice(2);
+const digestFile = flagArgs.includes('--digest') ? flagArgs[flagArgs.indexOf('--digest') + 1] : null;
+const input = flagArgs.find((a, i) => !a.startsWith('--') && flagArgs[i - 1] !== '--digest') ?? path.join(ROOT, 'scripts/figma/.roundtrip-input.json');
 if (!fs.existsSync(input)) { console.error(`✖ No existe ${path.relative(ROOT, input)}. Ejecuta extract-facts.figma.js en Figma y guarda su salida ahí.`); process.exit(2); }
 const { sets } = JSON.parse(fs.readFileSync(input, 'utf8'));
+
+// --digest <archivo>: salida de extract-facts.figma.js (mode "digest"). Si coincide con la extracción guardada, esa extracción
+// sigue describiendo a Figma: se marca como vigente (mtime) y se compara contra los contratos actuales.
+if (digestFile) {
+  const cd = (v) => (Array.isArray(v) ? '[' + v.map(cd).join(',') + ']' : v && typeof v === 'object' ? '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + cd(v[k])).join(',') + '}' : JSON.stringify(v));
+  const { digests } = JSON.parse(fs.readFileSync(path.resolve(digestFile), 'utf8'));
+  const stale = sets.filter((x) => digests[x.name] !== hash(cd({ defs: x.defs, layers: x.layers, alt: x.alt, h: x.h }))).map((x) => x.name);
+  const extra = Object.keys(digests).filter((n) => !sets.some((x) => x.name === n));
+  if (stale.length || extra.length) { console.error(`✖ Figma cambió desde la última extracción completa (${[...stale, ...extra].join(', ')}). Ejecuta extract-facts.figma.js con mode "hashes" y guarda la salida en ${path.relative(ROOT, input)}.`); process.exit(2); }
+  const now = new Date(); fs.utimesSync(input, now, now);
+}
 const specs = new Map(loadSpecs().map((s) => [s.spec.name, s.spec]));
 
 const diffs = [];

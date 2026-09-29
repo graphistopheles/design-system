@@ -7,3 +7,5 @@ spec-diff.md
 .env
 scripts/figma/.roundtrip-input.json
 scripts/figma/.roundtrip-tokens.json
+coherence-report.md
+scripts/figma/.roundtrip-digest.json
