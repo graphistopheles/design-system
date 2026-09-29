@@ -78,19 +78,22 @@ const flatten = (obj, prefix = []) =>
   Object.entries(obj).flatMap(([k, v]) =>
     k.startsWith('$') ? [] : v && typeof v === 'object' && '$value' in v ? [[[...prefix, k].join('.'), JSON.stringify(v.$value)]] : v && typeof v === 'object' ? flatten(v, [...prefix, k]) : [],
   );
-const semDir = 'specs/tokens/semantic';
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
-const curFiles = fs.readdirSync(path.join(ROOT, semDir)).filter((f) => f.endsWith('.json')).map((f) => `${semDir}/${f}`);
-const tokCur = new Map(curFiles.flatMap((f) => flatten(read(f)).map(([k, v]) => [`${path.basename(f)}:${k}`, v])));
-const tokPrev = new Map(listAtBase(semDir).filter((f) => f.endsWith('.json')).flatMap((f) => flatten(atBase(f) ?? {}).map(([k, v]) => [`${path.basename(f)}:${k}`, v])));
-const tokChanges = [];
-let tokLevel = 'none';
-for (const [k, v] of tokPrev) {
-  if (!tokCur.has(k)) { tokLevel = max(tokLevel, 'major'); tokChanges.push(`**major** · \`${k}\` eliminado`); }
-  else if (tokCur.get(k) !== v) { tokLevel = max(tokLevel, 'patch'); tokChanges.push(`**patch** · \`${k}\`: ${v} → ${tokCur.get(k)}`); }
+// Un cambio en un primitivo repercute en todo lo que lo usa aunque no toque ningún contrato: se clasifica igual.
+for (const [dirName, label] of [['primitives', 'Tokens primitivos'], ['semantic', 'Tokens semánticos']]) {
+  const dir = `specs/tokens/${dirName}`;
+  const curFiles = fs.readdirSync(path.join(ROOT, dir)).filter((f) => f.endsWith('.json')).map((f) => `${dir}/${f}`);
+  const tokCur = new Map(curFiles.flatMap((f) => flatten(read(f)).map(([k, v]) => [`${path.basename(f)}:${k}`, v])));
+  const tokPrev = new Map(listAtBase(dir).filter((f) => f.endsWith('.json')).flatMap((f) => flatten(atBase(f) ?? {}).map(([k, v]) => [`${path.basename(f)}:${k}`, v])));
+  const tokChanges = [];
+  let tokLevel = 'none';
+  for (const [k, v] of tokPrev) {
+    if (!tokCur.has(k)) { tokLevel = max(tokLevel, 'major'); tokChanges.push(`**major** · \`${k}\` eliminado`); }
+    else if (tokCur.get(k) !== v) { tokLevel = max(tokLevel, 'patch'); tokChanges.push(`**patch** · \`${k}\`: ${v} → ${tokCur.get(k)}`); }
+  }
+  for (const k of tokCur.keys()) if (!tokPrev.has(k)) { tokLevel = max(tokLevel, 'minor'); tokChanges.push(`**minor** · \`${k}\` agregado`); }
+  if (tokLevel !== 'none') report.push({ name: label, level: tokLevel, changes: tokChanges });
 }
-for (const k of tokCur.keys()) if (!tokPrev.has(k)) { tokLevel = max(tokLevel, 'minor'); tokChanges.push(`**minor** · \`${k}\` agregado`); }
-if (tokLevel !== 'none') report.push({ name: 'Tokens semánticos', level: tokLevel, changes: tokChanges });
 
 // ---------- Salida ----------
 const overall = report.reduce((acc, r) => max(acc, r.level), 'none');

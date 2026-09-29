@@ -6,3 +6,4 @@ spec-diff.md
 *.log
 .env
 scripts/figma/.roundtrip-input.json
+scripts/figma/.roundtrip-tokens.json

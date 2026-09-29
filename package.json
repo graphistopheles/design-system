@@ -22,7 +22,8 @@
     "dev": "npm run tokens && npm run generate && npm run dev -w @ds-ia/landing",
     "build": "npm run check && npm run build -w @ds-ia/landing",
     "preview": "npm run preview -w @ds-ia/landing",
-    "roundtrip": "node scripts/figma-roundtrip.mjs"
+    "roundtrip": "node scripts/figma-roundtrip.mjs",
+    "roundtrip:tokens": "node scripts/figma-roundtrip-tokens.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
