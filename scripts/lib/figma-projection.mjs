@@ -47,6 +47,7 @@ export function expectedFacts(spec, combo, layers) {
 
     const L = st.layout ?? {};
     const f = { dir: L.direction === 'column' ? 'VERTICAL' : 'HORIZONTAL' };
+    f.w = path === 'root' ? (L.width === 'full' ? 'FIXED' : 'HUG') : (L.width === 'full' || st['max-width'] ? 'FILL' : 'HUG');
     f.align = L.align ? (AL[L.align] ?? 'MIN') : st.height ? 'CENTER' : 'MIN';
     f.justify = L.justify ? (L.justify === 'between' ? 'SPACE_BETWEEN' : (AL[L.justify] ?? 'MIN')) : 'MIN';
     // un hijo con layout.center centra al padre en su eje (regla del motor de render)
