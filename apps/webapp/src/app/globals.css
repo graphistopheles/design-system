@@ -1,13 +1,15 @@
-/* Capas del sistema (ver ADR-0003):
+/* Capas del sistema (ver ADR-0003 y ADR-0006), las mismas que la landing:
    1. tokens.css  → variables CSS generadas desde /specs/tokens (primitivos + semánticos + modos)
    2. theme.css   → tema Tailwind generado: SOLO utilidades semánticas; las escalas por defecto están anuladas
    3. @ds-ia/core → clases por componente generadas desde /specs/components (packages/ui-core)
-   Todo lo que se escriba a mano en la landing es la capa "extensions" y pasa por el lint de consumo. */
+   Todo lo que se escriba a mano en la webapp es la capa "extensions" y pasa por el lint de consumo. */
 @import "tailwindcss";
 @import "@ds-ia/tokens/tokens.css";
 @import "@ds-ia/tokens/theme.css";
 
+/* Tailwind solo escanea la app; las clases de los paquetes del workspace se declaran a mano. */
 @source "../../../../packages/ui-core/src";
+@source "../../../../packages/ui-react/src";
 
 @layer base {
   html {

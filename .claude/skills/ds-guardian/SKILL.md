@@ -57,6 +57,6 @@ Decide: <persona o rol>.
 
 ## Nunca
 - Hacer merge, cerrar conflictos o commitear a `main`.
-- Editar a mano archivos generados (`packages/tokens/dist`, `components/generated`) ni variables de Figma sin pasar por el contrato.
+- Editar a mano archivos generados (`packages/tokens/dist`, `packages/ui-core/src`) ni variables de Figma sin pasar por el contrato.
 - Aceptar un primitivo dentro de un contrato de componente, un semántico con valor crudo, o saltarse un gate (contraste, capas, consumo).
 - Dar por coincidente lo que está en ○.

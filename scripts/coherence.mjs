@@ -36,7 +36,7 @@ r = node('scripts/generate-components.mjs', '--check');
 add({ surface: 'Código', check: 'Código generado al día con el contrato', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'superficie-atrasada', action: '`npm run generate`; si alguien editó un archivo generado a mano, se revierte y se regenera' });
 
 r = node('scripts/lint-consumption.mjs');
-add({ surface: 'Código', check: 'Landing usa solo tokens semánticos', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'violacion', action: 'Reemplazar el valor suelto por un token semántico; si falta, proponerlo con ADR (ds-code-to-specs)' });
+add({ surface: 'Código', check: 'Superficies de código usan solo tokens semánticos', status: r.code === 0 ? 'ok' : 'fail', detail: r.code === 0 ? tail(r.out, 1) : tail(r.out), drift: 'violacion', action: 'Reemplazar el valor suelto por un token semántico; si falta, proponerlo con ADR (ds-code-to-specs)' });
 
 // ---------- 5. Semver contra la base ----------
 let contractChanged = false;
@@ -49,9 +49,11 @@ if (base) {
 
 // ---------- 6. Extensiones repetidas en la landing (informativo) ----------
 {
-  const files = ['sections', 'pages', 'layouts'].flatMap((d) => { const p = path.join(ROOT, 'apps/landing/src', d); return fs.existsSync(p) ? fs.readdirSync(p).map((f) => path.join(p, f)) : []; }).filter((f) => f.endsWith('.astro'));
+  // Superficies escritas a mano: .astro de la landing (class) y .tsx de la webapp (className).
+  const walk = (d) => (fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])) : []);
+  const files = [...walk(path.join(ROOT, 'apps/landing/src')), ...walk(path.join(ROOT, 'apps/webapp/src'))].filter((f) => /\.(astro|tsx)$/.test(f) && !f.includes(`${path.sep}components${path.sep}`));
   const seen = new Map();
-  for (const f of files) for (const m of fs.readFileSync(f, 'utf8').matchAll(/<(Button|Badge|Card|Input|Header)\b[^>]*?\bclass="([^"]+)"/g)) {
+  for (const f of files) for (const m of fs.readFileSync(f, 'utf8').matchAll(/<(Button|Badge|Card|Input|Header)\b[^>]*?\bclass(?:Name)?="([^"]+)"/g)) {
     for (const cls of m[2].split(/\s+/)) seen.set(`${m[1]} · ${cls}`, (seen.get(`${m[1]} · ${cls}`) ?? 0) + 1);
   }
   const repeated = [...seen].filter(([, n]) => n >= 2);

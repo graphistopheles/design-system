@@ -10,5 +10,5 @@ description: Crea un componente nuevo en el sistema a partir de su contrato (spe
 3. Crea `specs/components/<nombre>.spec.json` con `$schema`, `version: "0.1.0"`, `status: "proposed"`, props, anatomy, base, states y variants (máx. 5 valores visuales por prop). Solo tokens semánticos.
 4. Crea `specs/requirements/<nombre>.a11y.md` con MUST/SHOULD (roles ARIA, teclado, contraste, contenido).
 5. `npm run tokens && npm run validate && npm run generate`.
-6. Escribe `apps/landing/src/components/<Nombre>.astro` sobre `generated/<nombre>.ts`: HTML semántico, a11y, prop `class` para extensiones. Sin estilos propios.
+6. Escribe un andamio por superficie sobre `@ds-ia/core` (`packages/ui-core/src/<nombre>.ts`), sin estilos propios: `apps/landing/src/components/<Nombre>.astro` (prop `class`) y `packages/ui-react/src/<Nombre>.tsx` (prop `className`), exportado en `packages/ui-react/src/index.ts`. HTML semántico y a11y según `specs/requirements`. `npm run generate` avisa de los que falten (ADR-0006).
 7. `npm run check`, captura de la landing y PR. Cuando se apruebe, `status: "stable"` y `version: "1.0.0"`.

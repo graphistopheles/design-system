@@ -1,0 +1,11 @@
+{
+  "name": "@ds-ia/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Contratos TypeScript y mapas de clases de cada componente, GENERADOS desde /specs/components. Sin dependencias de framework.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "sideEffects": false
+}

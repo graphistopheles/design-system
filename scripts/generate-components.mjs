@@ -1,12 +1,12 @@
 // Borde "specs → código": genera el contrato TypeScript y el mapa de clases de cada componente.
 // Determinístico (sin IA). Uso:
-//   node scripts/generate-components.mjs          → escribe apps/landing/src/components/generated
+//   node scripts/generate-components.mjs          → escribe packages/ui-core/src (contratos + mapas de clases, sin framework)
 //   node scripts/generate-components.mjs --check  → falla si lo generado no coincide con los specs (CI)
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, loadSpecs, entryToClasses, normalizeCascade, camel } from './lib/specs.mjs';
 
-const OUT = path.join(ROOT, 'apps/landing/src/components/generated');
+const OUT = path.join(ROOT, 'packages/ui-core/src');
 const CHECK = process.argv.includes('--check');
 const HEADER = (file) => `// GENERADO desde ${file} por scripts/generate-components.mjs. No editar a mano:\n// cambia el spec y vuelve a ejecutar \`npm run generate\`.\n`;
 
@@ -104,7 +104,11 @@ if (CHECK) {
 } else {
   fs.mkdirSync(OUT, { recursive: true });
   for (const [f, c] of files) fs.writeFileSync(path.join(OUT, f), c);
-  const missing = specs.filter((s) => !fs.existsSync(path.join(ROOT, 'apps/landing/src/components', `${s.spec.name}.astro`)));
-  console.log(`✔ ${specs.length} contratos generados en apps/landing/src/components/generated`);
-  if (missing.length) console.log(`  ⚠ Sin componente Astro todavía: ${missing.map((s) => s.spec.name).join(', ')}`);
+  console.log(`✔ ${specs.length} contratos generados en packages/ui-core/src`);
+  // Andamios por superficie (escritos a mano sobre el contrato): Astro y, si existe, React.
+  const surfaces = [['Astro', (n) => path.join(ROOT, 'apps/landing/src/components', `${n}.astro`), true], ['React', (n) => path.join(ROOT, 'packages/ui-react/src', `${n}.tsx`), fs.existsSync(path.join(ROOT, 'packages/ui-react'))]];
+  for (const [label, file, active] of surfaces) {
+    const missing = active ? specs.filter((s) => !fs.existsSync(file(s.spec.name))) : [];
+    if (missing.length) console.log(`  ⚠ Sin componente ${label} todavía: ${missing.map((s) => s.spec.name).join(', ')}`);
+  }
 }
