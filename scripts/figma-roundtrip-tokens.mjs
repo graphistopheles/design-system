@@ -87,13 +87,37 @@ const need = changed.filter((c) => c.kind !== 'falta en Figma' && !(c.name in fi
 console.log(`\n✖ ${changed.length} variable(s) difieren:`);
 const parse = (line) => { const [name, type, scopes, vals, code] = line.split('|'); return { name, type, scopes, vals: vals.split('¦'), code }; };
 const applyPlan = [];
+
+// ---------- comparación a tres bandas (ADR-0004 §5.2): base (rama de referencia) · contrato · Figma ----------
+const gitq = (...a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); } catch { return null; } };
+const baseArg = args.includes('--base') ? args[args.indexOf('--base') + 1] : null;
+const BASE = baseArg ?? (gitq('rev-parse', '--verify', 'origin/main') ? 'origin/main' : gitq('rev-parse', '--verify', 'main') ? 'main' : null);
+const baseFiles = BASE ? (gitq('ls-tree', '-r', '--name-only', BASE, 'specs/tokens/primitives', 'specs/tokens/semantic') ?? '').split('\n').filter((f) => f.endsWith('.json')) : [];
+const norm = (v) => (typeof v === 'string' ? (v.startsWith('{') ? '@' + v.slice(1, -1).replace(/\./g, '/') : /^#[0-9a-f]{6}$/i.test(v) ? v.toUpperCase() : null) : null);
+/** Valor de una variable en la base, en la misma notación que la línea de Figma (@alias o #RRGGBB); null si no se puede saber. */
+const baseValue = (name) => {
+  const hits = [];
+  for (const f of baseFiles) {
+    let node; try { node = JSON.parse(gitq('show', `${BASE}:${f}`)); } catch { continue; }
+    for (const k of name.split('/')) node = node?.[k];
+    if (node && typeof node === 'object' && '$value' in node) hits.push(norm(node.$value));
+  }
+  return hits.length === 1 ? hits[0] : null;
+};
+/** convergente · superficie-atrasada (solo cambió el contrato) · figma-adelantado (solo cambió Figma) · conflicto (los tres difieren) · sin-base */
+const classify = (b, c, f) => (c === f ? 'convergente' : b == null ? 'sin-base' : f === b ? 'superficie-atrasada' : c === b ? 'figma-adelantado' : 'conflicto');
+
 for (const c of changed) {
   const want = repo.get(c.collection).lines.get(c.name);
   const got = figLines[c.name];
   if (c.kind === 'falta en Figma') { console.log(` - \`${c.name}\` (${c.collection}): existe en el contrato y falta en Figma`); continue; }
   if (!got) { console.log(` - \`${c.name}\` (${c.collection}): ${c.kind} · sin detalle todavía`); continue; }
-  console.log(` - \`${c.name}\` (${c.collection}): ${c.kind}\n     contrato: ${want ?? '—'}\n     Figma:    ${got}`);
-  applyPlan.push({ ...c, want: want && parse(want), got: parse(got) });
+  const P = { want: want && parse(want), got: parse(got) };
+  const single = P.want && P.want.vals.length === 1 && P.got.vals.length === 1;
+  const b = single ? baseValue(c.name) : null;
+  const cls = single ? classify(b, P.want.vals[0], P.got.vals[0]) : 'sin-base';
+  console.log(` - \`${c.name}\` (${c.collection}): ${c.kind} · clase: ${cls}\n     base (${BASE ?? 'sin base'}): ${b ?? '—'}\n     contrato: ${want ?? '—'}\n     Figma:    ${got}`);
+  applyPlan.push({ ...c, ...P, cls });
 }
 if (need.length) {
   console.log('\nSiguiente paso: mode "lines", args { "names": ' + JSON.stringify(need.slice(0, 40)) + ' }  ->  "lines": <salida>');
@@ -139,6 +163,11 @@ const touched = new Map();
 if (APPLY) {
   for (const p of applyPlan) {
     if (p.kind !== 'difiere' || !p.want) { manual.push(`\`${p.name}\`: ${p.kind} (variable nueva o eliminada: requiere ADR)`); continue; }
+    // Solo se lleva al contrato lo que Figma cambió y el contrato no (ADR-0004): aplicar otra clase borraría el cambio del otro lado.
+    if (p.cls !== 'figma-adelantado') {
+      const why = { conflicto: 'CONFLICTO: base, contrato y Figma difieren; lo decide una persona (etiqueta needs-decision)', 'superficie-atrasada': 'solo cambió el contrato: Figma está atrasado, regénéralo con ds-specs-to-figma', 'sin-base': 'no se pudo determinar el valor base; revisa a mano' }[p.cls] ?? p.cls;
+      manual.push(`\`${p.name}\`: no aplicado · ${why}`); continue;
+    }
     if (p.want.scopes !== p.got.scopes || p.want.code !== p.got.code || p.want.type !== p.got.type) { manual.push(`\`${p.name}\`: cambió scopes, code syntax o tipo (lo genera build.mjs; no se copia)`); continue; }
     if (p.got.vals.length !== 1) { manual.push(`\`${p.name}\`: variable multimodo, edítala a mano en specs/tokens/semantic`); continue; }
     const v = p.got.vals[0];
@@ -162,7 +191,9 @@ if (APPLY) {
   for (const [file, text] of touched) fs.writeFileSync(file, text);
   console.log(`\n${touched.size ? '✔ Escribí ' + touched.size + ' archivo(s) de tokens. Ahora: npm run check && npm run diff' : 'Nada que escribir automáticamente.'}`);
 } else {
-  console.log('\nUsa --apply para llevar al contrato lo que se pueda (color primitivo y alias semántico).');
+  const safe = applyPlan.filter((p) => p.cls === 'figma-adelantado').length;
+  console.log(safe ? `\n${safe} cambio(s) de Figma se pueden llevar al contrato con --apply (solo \`figma-adelantado\`).` : '\nNada se puede llevar al contrato con --apply: ninguna variable es `figma-adelantado`.');
+  for (const p of applyPlan.filter((x) => x.cls === 'conflicto')) console.log(`⚠ CONFLICTO en \`${p.name}\`: escalar a una persona (needs-decision); no aplicar ni regenerar.`);
 }
 if (manual.length) { console.log('\nRequiere edición manual:'); manual.forEach((m) => console.log(' - ' + m)); }
 process.exit(APPLY && touched.size ? 0 : 1);
