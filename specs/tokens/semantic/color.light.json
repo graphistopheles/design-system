@@ -46,7 +46,7 @@
         "$description": "Interactivo sólido secundario"
       },
       "fill-secondary-hover": {
-        "$value": "{neutral.800}"
+        "$value": "{neutral.900}"
       },
       "fill-secondary-active": {
         "$value": "{neutral.950}"
