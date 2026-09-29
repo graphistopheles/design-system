@@ -1,0 +1,451 @@
+{
+  "typography": {
+    "$description": "Estilos semánticos de texto · modo Desktop",
+    "family": {
+      "$type": "fontFamily",
+      "ui": {
+        "$value": "{font-family.sans}"
+      },
+      "code": {
+        "$value": "{font-family.mono}"
+      }
+    },
+    "display-1": {
+      "$description": "Hero de landing, titulares editoriales",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.72}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.700}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.tight}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tighter}"
+      }
+    },
+    "display-2": {
+      "$description": "Hero de landing, titulares editoriales",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.60}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.700}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.tight}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tighter}"
+      }
+    },
+    "display-3": {
+      "$description": "Hero de landing, titulares editoriales",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.48}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.700}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.115}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "heading-h1": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.40}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "heading-h2": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.34}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "heading-h3": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.28}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug-alt}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "heading-h4": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.24}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug-alt}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h5": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.20}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.135}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h6": {
+      "$description": "Jerarquía de contenido. Un solo H1 por pantalla",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.18}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.600}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.normal}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "label-1": {
+      "$description": "Botones, tabs, labels de formulario. Nunca párrafos",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.16}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.500}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "label-2": {
+      "$description": "Botones, tabs, labels de formulario. Nunca párrafos",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.14}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.500}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "label-3": {
+      "$description": "Botones, tabs, labels de formulario. Nunca párrafos",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.12}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.500}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.wide}"
+      }
+    },
+    "body-1": {
+      "$description": "Texto de lectura. body-3 es el default",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.20}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.relaxed}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "body-2": {
+      "$description": "Texto de lectura. body-3 es el default",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.18}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.relaxed}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "body-3": {
+      "$description": "Texto de lectura. body-3 es el default",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.16}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.relaxed}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "body-4": {
+      "$description": "Texto de lectura. body-3 es el default",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.14}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.145}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "body-5": {
+      "$description": "Texto de lectura. body-3 es el default",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.12}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.normal}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "caption-1": {
+      "$description": "Metadata, timestamps, fine print",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.12}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.135}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.wide}"
+      }
+    },
+    "caption-2": {
+      "$description": "Metadata, timestamps, fine print",
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{font-family.sans}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.11}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{font-weight.400}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug-alt}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.wider}"
+      }
+    }
+  }
+}

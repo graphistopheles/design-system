@@ -1,0 +1,142 @@
+{
+  "font-family": {
+    "$type": "fontFamily",
+    "sans": {
+      "$value": [
+        "Inter Variable",
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ],
+      "$description": "Fuente principal: toda la interfaz"
+    },
+    "mono": {
+      "$value": [
+        "IBM Plex Mono",
+        "ui-monospace",
+        "monospace"
+      ],
+      "$description": "Código, datos tabulares e identificadores"
+    }
+  },
+  "font-size": {
+    "$type": "dimension",
+    "11": {
+      "$value": "11px"
+    },
+    "12": {
+      "$value": "12px"
+    },
+    "14": {
+      "$value": "14px"
+    },
+    "16": {
+      "$value": "16px"
+    },
+    "18": {
+      "$value": "18px"
+    },
+    "20": {
+      "$value": "20px"
+    },
+    "22": {
+      "$value": "22px"
+    },
+    "24": {
+      "$value": "24px"
+    },
+    "26": {
+      "$value": "26px"
+    },
+    "28": {
+      "$value": "28px"
+    },
+    "30": {
+      "$value": "30px"
+    },
+    "32": {
+      "$value": "32px"
+    },
+    "34": {
+      "$value": "34px"
+    },
+    "36": {
+      "$value": "36px"
+    },
+    "40": {
+      "$value": "40px"
+    },
+    "48": {
+      "$value": "48px"
+    },
+    "60": {
+      "$value": "60px"
+    },
+    "72": {
+      "$value": "72px"
+    }
+  },
+  "font-weight": {
+    "$type": "fontWeight",
+    "400": {
+      "$value": 400
+    },
+    "500": {
+      "$value": 500
+    },
+    "600": {
+      "$value": 600
+    },
+    "700": {
+      "$value": 700
+    }
+  },
+  "line-height": {
+    "$type": "number",
+    "tight": {
+      "$value": 1.1
+    },
+    "snug": {
+      "$value": 1.2
+    },
+    "snug-alt": {
+      "$value": 1.3
+    },
+    "normal": {
+      "$value": 1.4
+    },
+    "relaxed": {
+      "$value": 1.5
+    },
+    "115": {
+      "$value": 1.15
+    },
+    "125": {
+      "$value": 1.25
+    },
+    "135": {
+      "$value": 1.35
+    },
+    "145": {
+      "$value": 1.45
+    }
+  },
+  "letter-spacing": {
+    "$type": "dimension",
+    "tighter": {
+      "$value": "-0.02em"
+    },
+    "tight": {
+      "$value": "-0.01em"
+    },
+    "normal": {
+      "$value": "0em"
+    },
+    "wide": {
+      "$value": "0.01em"
+    },
+    "wider": {
+      "$value": "0.02em"
+    }
+  }
+}

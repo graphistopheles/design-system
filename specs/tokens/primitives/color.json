@@ -1,0 +1,442 @@
+{
+  "neutral": {
+    "$type": "color",
+    "$description": "Base del sistema: el 90% de la UI (fondos, textos, bordes)",
+    "50": {
+      "$value": "#FFFFFF"
+    },
+    "100": {
+      "$value": "#FAFAF7"
+    },
+    "150": {
+      "$value": "#F7F7F4"
+    },
+    "200": {
+      "$value": "#EFEEE8"
+    },
+    "300": {
+      "$value": "#E6E5E0"
+    },
+    "400": {
+      "$value": "#CFCDC4"
+    },
+    "500": {
+      "$value": "#B0AEA6"
+    },
+    "600": {
+      "$value": "#929088"
+    },
+    "700": {
+      "$value": "#737169"
+    },
+    "800": {
+      "$value": "#54534B"
+    },
+    "900": {
+      "$value": "#35342D"
+    },
+    "950": {
+      "$value": "#26251E"
+    }
+  },
+  "brand": {
+    "$type": "color",
+    "$description": "Acción de marca: uso deliberadamente escaso (CTA, links, foco)",
+    "50": {
+      "$value": "#ECEBFA"
+    },
+    "100": {
+      "$value": "#D9D7F4"
+    },
+    "150": {
+      "$value": "#C7C3EF"
+    },
+    "200": {
+      "$value": "#B4AFEA"
+    },
+    "300": {
+      "$value": "#8E88DF"
+    },
+    "400": {
+      "$value": "#6960D5"
+    },
+    "500": {
+      "$value": "#4338CA"
+    },
+    "600": {
+      "$value": "#362DA2"
+    },
+    "700": {
+      "$value": "#282279"
+    },
+    "800": {
+      "$value": "#1B1651"
+    },
+    "900": {
+      "$value": "#0D0B28"
+    },
+    "950": {
+      "$value": "#070614"
+    }
+  },
+  "success": {
+    "$type": "color",
+    "$description": "Feedback funcional: validación correcta",
+    "50": {
+      "$value": "#D1F3DE"
+    },
+    "100": {
+      "$value": "#BDEACD"
+    },
+    "150": {
+      "$value": "#A8E1BD"
+    },
+    "200": {
+      "$value": "#93D8AC"
+    },
+    "300": {
+      "$value": "#6AC78C"
+    },
+    "400": {
+      "$value": "#40B56B"
+    },
+    "500": {
+      "$value": "#17A34A"
+    },
+    "600": {
+      "$value": "#12823B"
+    },
+    "700": {
+      "$value": "#0E622C"
+    },
+    "800": {
+      "$value": "#09411E"
+    },
+    "900": {
+      "$value": "#05210F"
+    },
+    "950": {
+      "$value": "#021007"
+    }
+  },
+  "error": {
+    "$type": "color",
+    "$description": "Feedback funcional: validación incorrecta y acciones destructivas",
+    "50": {
+      "$value": "#FCE9E9"
+    },
+    "100": {
+      "$value": "#F8D4D3"
+    },
+    "150": {
+      "$value": "#F5BEBE"
+    },
+    "200": {
+      "$value": "#F1A8A8"
+    },
+    "300": {
+      "$value": "#EA7D7C"
+    },
+    "400": {
+      "$value": "#E35151"
+    },
+    "500": {
+      "$value": "#DC2625"
+    },
+    "600": {
+      "$value": "#B01E1E"
+    },
+    "700": {
+      "$value": "#841716"
+    },
+    "800": {
+      "$value": "#580F0F"
+    },
+    "900": {
+      "$value": "#2C0807"
+    },
+    "950": {
+      "$value": "#160404"
+    }
+  },
+  "terracota": {
+    "$type": "color",
+    "$description": "Categórico: tags y badges",
+    "50": {
+      "$value": "#FAEFEB"
+    },
+    "100": {
+      "$value": "#F4DFD7"
+    },
+    "150": {
+      "$value": "#EFCEC3"
+    },
+    "200": {
+      "$value": "#EABEAF"
+    },
+    "300": {
+      "$value": "#DF9E88"
+    },
+    "400": {
+      "$value": "#D57D60"
+    },
+    "500": {
+      "$value": "#CA5D38"
+    },
+    "600": {
+      "$value": "#A24A2D"
+    },
+    "700": {
+      "$value": "#793822"
+    },
+    "800": {
+      "$value": "#512516"
+    },
+    "900": {
+      "$value": "#28130B"
+    },
+    "950": {
+      "$value": "#140906"
+    }
+  },
+  "cyan": {
+    "$type": "color",
+    "$description": "Categórico: tags y badges",
+    "50": {
+      "$value": "#EBF8FA"
+    },
+    "100": {
+      "$value": "#D7F1F4"
+    },
+    "150": {
+      "$value": "#C3EAEF"
+    },
+    "200": {
+      "$value": "#AFE3EA"
+    },
+    "300": {
+      "$value": "#88D4DF"
+    },
+    "400": {
+      "$value": "#60C6D5"
+    },
+    "500": {
+      "$value": "#38B8CA"
+    },
+    "600": {
+      "$value": "#2D93A2"
+    },
+    "700": {
+      "$value": "#226E79"
+    },
+    "800": {
+      "$value": "#164A51"
+    },
+    "900": {
+      "$value": "#0B2528"
+    },
+    "950": {
+      "$value": "#061214"
+    }
+  },
+  "gold": {
+    "$type": "color",
+    "$description": "Categórico: tags y badges",
+    "50": {
+      "$value": "#FAF8EB"
+    },
+    "100": {
+      "$value": "#F4F1D8"
+    },
+    "150": {
+      "$value": "#EFEAC4"
+    },
+    "200": {
+      "$value": "#E9E3B0"
+    },
+    "300": {
+      "$value": "#DFD489"
+    },
+    "400": {
+      "$value": "#D4C661"
+    },
+    "500": {
+      "$value": "#C9B83A"
+    },
+    "600": {
+      "$value": "#A1932E"
+    },
+    "700": {
+      "$value": "#796E23"
+    },
+    "800": {
+      "$value": "#504A17"
+    },
+    "900": {
+      "$value": "#28250C"
+    },
+    "950": {
+      "$value": "#141206"
+    }
+  },
+  "discovery": {
+    "$type": "color",
+    "$description": "Categórico, fase de proceso: descubrimiento",
+    "50": {
+      "$value": "#D7EEF9"
+    },
+    "100": {
+      "$value": "#BFE2F4"
+    },
+    "150": {
+      "$value": "#A7D7EE"
+    },
+    "200": {
+      "$value": "#8FCBE8"
+    },
+    "300": {
+      "$value": "#60B3DD"
+    },
+    "400": {
+      "$value": "#309CD1"
+    },
+    "500": {
+      "$value": "#0084C6"
+    },
+    "600": {
+      "$value": "#006A9E"
+    },
+    "700": {
+      "$value": "#004F77"
+    },
+    "800": {
+      "$value": "#00354F"
+    },
+    "900": {
+      "$value": "#001A28"
+    },
+    "950": {
+      "$value": "#000D14"
+    }
+  },
+  "prototype": {
+    "$type": "color",
+    "$description": "Categórico, fase de proceso: prototipo",
+    "50": {
+      "$value": "#BBF1EC"
+    },
+    "100": {
+      "$value": "#A7E6E1"
+    },
+    "150": {
+      "$value": "#94DCD6"
+    },
+    "200": {
+      "$value": "#81D2CB"
+    },
+    "300": {
+      "$value": "#5ABDB4"
+    },
+    "400": {
+      "$value": "#34A99E"
+    },
+    "500": {
+      "$value": "#0D9488"
+    },
+    "600": {
+      "$value": "#0A766D"
+    },
+    "700": {
+      "$value": "#085952"
+    },
+    "800": {
+      "$value": "#053B36"
+    },
+    "900": {
+      "$value": "#031E1B"
+    },
+    "950": {
+      "$value": "#010F0E"
+    }
+  },
+  "validation": {
+    "$type": "color",
+    "$description": "Categórico, fase de proceso: validación",
+    "50": {
+      "$value": "#FDF3E7"
+    },
+    "100": {
+      "$value": "#FBE8CE"
+    },
+    "150": {
+      "$value": "#F9DCB6"
+    },
+    "200": {
+      "$value": "#F7D09D"
+    },
+    "300": {
+      "$value": "#F2B96D"
+    },
+    "400": {
+      "$value": "#EEA13C"
+    },
+    "500": {
+      "$value": "#EA8A0B"
+    },
+    "600": {
+      "$value": "#BB6E09"
+    },
+    "700": {
+      "$value": "#8C5307"
+    },
+    "800": {
+      "$value": "#5E3704"
+    },
+    "900": {
+      "$value": "#2F1C02"
+    },
+    "950": {
+      "$value": "#170E01"
+    }
+  },
+  "handoff": {
+    "$type": "color",
+    "$description": "Categórico, fase de proceso: entrega",
+    "50": {
+      "$value": "#FCEAF5"
+    },
+    "100": {
+      "$value": "#F8D5EA"
+    },
+    "150": {
+      "$value": "#F5C0E0"
+    },
+    "200": {
+      "$value": "#F1ABD5"
+    },
+    "300": {
+      "$value": "#EA82C0"
+    },
+    "400": {
+      "$value": "#E358AB"
+    },
+    "500": {
+      "$value": "#DC2E96"
+    },
+    "600": {
+      "$value": "#B02578"
+    },
+    "700": {
+      "$value": "#841C5A"
+    },
+    "800": {
+      "$value": "#58123C"
+    },
+    "900": {
+      "$value": "#2C091E"
+    },
+    "950": {
+      "$value": "#16050F"
+    }
+  }
+}

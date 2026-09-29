@@ -1,0 +1,31 @@
+{
+  "copy": {
+    "$type": "string",
+    "$description": "Voz y tono como tokens (STRING, scope TEXT_CONTENT en Figma)",
+    "action": {
+      "save": {
+        "$value": "Guardar"
+      },
+      "cancel": {
+        "$value": "Cancelar"
+      },
+      "delete": {
+        "$value": "Eliminar"
+      },
+      "confirm": {
+        "$value": "Confirmar"
+      }
+    },
+    "state": {
+      "loading": {
+        "$value": "Cargando…"
+      },
+      "saved": {
+        "$value": "Guardado"
+      },
+      "error": {
+        "$value": "No hemos podido completar la acción"
+      }
+    }
+  }
+}

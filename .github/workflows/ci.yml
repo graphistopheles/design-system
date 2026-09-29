@@ -1,0 +1,51 @@
+name: Specs CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Tokens (DTCG → CSS, Tailwind, TS, Figma) · regla de capas
+        run: npm run tokens
+
+      - name: Contratos (esquema, tokens semánticos, contraste AA)
+        run: npm run validate
+
+      - name: Código generado al día con los specs
+        run: node scripts/generate-components.mjs --check
+
+      - name: Lint de consumo (sin primitivos, hex, px ni valores arbitrarios)
+        run: npm run lint:consumption
+
+      - name: Build de la landing
+        run: npm run build -w @ds-ia/landing
+
+      - name: Clasificación semver
+        if: github.event_name == 'pull_request'
+        run: node scripts/spec-diff.mjs origin/${{ github.base_ref }}
+
+      - name: Comentar el diff en el PR
+        if: github.event_name == 'pull_request' && always()
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: spec-diff
+          path: spec-diff.md

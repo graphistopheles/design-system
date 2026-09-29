@@ -1,0 +1,213 @@
+{
+  "space": {
+    "$type": "dimension",
+    "inset": {
+      "$description": "Padding interno",
+      "xs": {
+        "$value": "{space.1}"
+      },
+      "sm": {
+        "$value": "{space.2}"
+      },
+      "md": {
+        "$value": "{space.4}"
+      },
+      "lg": {
+        "$value": "{space.6}"
+      },
+      "xl": {
+        "$value": "{space.8}"
+      },
+      "2xl": {
+        "$value": "{space.16}"
+      }
+    },
+    "stack": {
+      "$description": "Gap vertical entre elementos",
+      "xs": {
+        "$value": "{space.1}"
+      },
+      "sm": {
+        "$value": "{space.2}"
+      },
+      "md": {
+        "$value": "{space.4}"
+      },
+      "lg": {
+        "$value": "{space.6}"
+      },
+      "xl": {
+        "$value": "{space.10}"
+      },
+      "2xl": {
+        "$value": "{space.16}"
+      }
+    },
+    "inline": {
+      "$description": "Gap horizontal entre elementos",
+      "xs": {
+        "$value": "{space.1}"
+      },
+      "sm": {
+        "$value": "{space.2}"
+      },
+      "md": {
+        "$value": "{space.3}"
+      },
+      "lg": {
+        "$value": "{space.4}"
+      },
+      "xl": {
+        "$value": "{space.6}"
+      }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "interactive": {
+      "$description": "Altura de elementos interactivos. md = 44px, mínimo táctil",
+      "sm": {
+        "$value": "{size.36}"
+      },
+      "md": {
+        "$value": "{size.44}"
+      },
+      "lg": {
+        "$value": "{size.48}"
+      }
+    },
+    "control": {
+      "$description": "Checkbox, radio, switch thumb",
+      "sm": {
+        "$value": "{size.16}"
+      },
+      "md": {
+        "$value": "{size.20}"
+      }
+    },
+    "icon": {
+      "sm": {
+        "$value": "{size.16}"
+      },
+      "md": {
+        "$value": "{size.20}"
+      },
+      "lg": {
+        "$value": "{size.24}"
+      }
+    },
+    "avatar": {
+      "sm": {
+        "$value": "{size.32}"
+      },
+      "md": {
+        "$value": "{size.40}"
+      },
+      "lg": {
+        "$value": "{size.56}"
+      }
+    },
+    "container": {
+      "$description": "Ancho máximo de contenido",
+      "content": {
+        "$value": "{container.xl}"
+      },
+      "prose": {
+        "$value": "{container.md}"
+      },
+      "narrow": {
+        "$value": "{container.sm}"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "interactive": {
+      "$value": "{radius.md}"
+    },
+    "surface": {
+      "$value": "{radius.lg}"
+    },
+    "tag": {
+      "$value": "{radius.sm}"
+    },
+    "control": {
+      "$value": "{radius.xs}"
+    },
+    "pill": {
+      "$value": "{radius.full}"
+    }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "default": {
+      "$value": "{border-width.1}"
+    },
+    "focus": {
+      "$value": "{border-width.2}"
+    }
+  },
+  "opacity": {
+    "$type": "number",
+    "skeleton": {
+      "$value": "{opacity.50}"
+    }
+  },
+  "z": {
+    "$type": "number",
+    "base": {
+      "$value": "{z.0}"
+    },
+    "sticky": {
+      "$value": "{z.10}"
+    },
+    "dropdown": {
+      "$value": "{z.20}"
+    },
+    "overlay": {
+      "$value": "{z.30}"
+    },
+    "modal": {
+      "$value": "{z.40}"
+    },
+    "popover": {
+      "$value": "{z.50}"
+    },
+    "toast": {
+      "$value": "{z.60}"
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Elevación semántica (Effect Styles en Figma)",
+    "raised": {
+      "$value": "{elevation.1}"
+    },
+    "floating": {
+      "$value": "{elevation.3}"
+    },
+    "overlay": {
+      "$value": "{elevation.4}"
+    }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "quick": {
+        "$value": "{duration.fast}"
+      },
+      "interactive": {
+        "$value": "{duration.normal}"
+      },
+      "emphasis": {
+        "$value": "{duration.slow}"
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "default": {
+        "$value": "{easing.standard}"
+      }
+    }
+  }
+}

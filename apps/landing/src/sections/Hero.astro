@@ -1,0 +1,53 @@
+---
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
+import ArrowIcon from './ArrowIcon.astro';
+import tokenData from '@ds-ia/tokens/tokens.json';
+
+// Se muestra el valor real del primitivo (contenido, no estilo): cambia solo al regenerar tokens.
+const brand500 = tokenData.tokens.find((t) => t.path === 'brand.500')?.value;
+---
+
+<section class="mx-auto max-w-content px-inset-lg py-inset-2xl grid gap-stack-xl lg:grid-cols-5 items-center" aria-labelledby="hero-title">
+  <div class="flex flex-col gap-stack-lg lg:col-span-3">
+    <Badge class="self-start" tone="category" category="discovery">Prueba de concepto · DS-IA</Badge>
+    <h1 id="hero-title" class="text-display-1 text-primary">Un contrato. Dos superficies. Cero traducciones.</h1>
+    <p class="text-body-1 text-secondary max-w-narrow">
+      Figma y el código leen la misma especificación. Los agentes traducen entre ellos y el CI verifica que nada se pierda en el camino.
+    </p>
+    <div class="flex flex-wrap gap-inline-md">
+      <Button size="lg" href="#componentes">
+        Ver componentes vivos
+        <ArrowIcon slot="icon" />
+      </Button>
+      <Button size="lg" variant="outline" href="#bordes">Cómo funciona</Button>
+    </div>
+  </div>
+
+  <!-- Cadena de tokens: la demostración de la guía (1.1) con valores reales -->
+  <figure class="flex flex-col gap-stack-sm lg:col-span-2" aria-label="Cadena de un token desde el primitivo hasta el componente">
+    <div class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex items-center justify-between gap-inline-lg">
+      <div class="flex flex-col gap-stack-xs">
+        <span class="text-caption-1 text-tertiary">Primitivo · valor crudo</span>
+        <code class="font-code text-body-3 text-primary">brand/500 = {brand500}</code>
+      </div>
+      <span class="size-icon-lg rounded-tag bg-brand" aria-hidden="true"></span>
+    </div>
+    <p class="text-label-3 text-brand px-inset-lg">↓ alias</p>
+    <div class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex flex-col gap-stack-xs">
+      <span class="text-caption-1 text-tertiary">Semántico · decisión de uso</span>
+      <code class="font-code text-body-3 text-primary">color/bg/fill-primary</code>
+    </div>
+    <p class="text-label-3 text-brand px-inset-lg">↓ consumido por</p>
+    <div class="rounded-surface bg-surface-dark p-inset-lg flex items-center justify-between gap-inline-lg">
+      <div class="flex flex-col gap-stack-xs">
+        <span class="text-caption-1 text-on-dark-secondary">Componente · contrato</span>
+        <code class="font-code text-body-3 text-on-dark">button.variant.primary</code>
+      </div>
+      <Button size="sm">Button</Button>
+    </div>
+    <figcaption class="text-body-4 text-tertiary px-inset-lg">
+      Cambia <code class="font-code">brand/500</code> en un solo lugar y todo lo que es "primario" cambia solo.
+    </figcaption>
+  </figure>
+</section>

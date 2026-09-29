@@ -1,0 +1,27 @@
+---
+// Scaffold sobre el contrato generado (specs/components/button.spec.json).
+// Estilos: generated/button.ts. Aquí solo va estructura, semántica HTML y la capa "extensions" (prop class).
+import { button, type ButtonContract } from './generated';
+
+interface Props extends ButtonContract {
+  class?: string;
+  'aria-label'?: string;
+}
+const { class: extensions, href, disabled = false, type = 'button', ...rest } = Astro.props;
+const c = button(Astro.props);
+const hasIcon = Astro.slots.has('icon');
+---
+
+{
+  href ? (
+    <a class:list={[c.root, extensions]} href={href} aria-label={rest['aria-label']}>
+      <span class={c.label}><slot /></span>
+      {hasIcon && <span class={c.icon} aria-hidden="true"><slot name="icon" /></span>}
+    </a>
+  ) : (
+    <button class:list={[c.root, extensions]} type={type} disabled={disabled} aria-label={rest['aria-label']}>
+      <span class={c.label}><slot /></span>
+      {hasIcon && <span class={c.icon} aria-hidden="true"><slot name="icon" /></span>}
+    </button>
+  )
+}

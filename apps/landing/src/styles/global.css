@@ -1,0 +1,35 @@
+/* Capas del sistema (ver ADR-0003):
+   1. tokens.css  → variables CSS generadas desde /specs/tokens (primitivos + semánticos + modos)
+   2. theme.css   → tema Tailwind generado: SOLO utilidades semánticas; las escalas por defecto están anuladas
+   3. generated/  → clases por componente generadas desde /specs/components
+   Todo lo que se escriba a mano en la landing es la capa "extensions" y pasa por el lint de consumo. */
+@import "tailwindcss";
+@import "@ds-ia/tokens/tokens.css";
+@import "@ds-ia/tokens/theme.css";
+
+@source "../components/generated";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-canvas text-primary text-body-3 font-ui antialiased;
+  }
+  ::selection {
+    @apply bg-brand-subtle text-primary;
+  }
+  :focus-visible {
+    @apply outline-focus;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0s !important;
+    }
+  }
+}

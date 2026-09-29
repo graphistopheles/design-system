@@ -1,0 +1,103 @@
+{
+  "typography": {
+    "$description": "Overrides modo Mobile (< 768px). H5, H6, Label, Body y Caption no cambian.",
+    "display-1": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.40}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "display-2": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.36}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.tight}"
+      }
+    },
+    "display-3": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.32}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.125}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h1": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.30}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug-alt}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h2": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.26}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.snug-alt}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h3": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.22}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.135}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    },
+    "heading-h4": {
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{font-size.20}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{line-height.135}"
+      },
+      "letter-spacing": {
+        "$type": "dimension",
+        "$value": "{letter-spacing.normal}"
+      }
+    }
+  }
+}

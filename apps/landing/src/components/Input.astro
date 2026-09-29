@@ -1,0 +1,32 @@
+---
+// Scaffold sobre specs/components/input.spec.json
+import { input, type InputContract } from './generated';
+
+interface Props extends InputContract {
+  class?: string;
+  id?: string;
+  autocomplete?: string;
+}
+const { class: extensions, label, name, type = 'text', placeholder, helper, invalid = false, required = false, disabled = false, autocomplete } =
+  Astro.props;
+const id = Astro.props.id ?? `field-${name}`;
+const helperId = helper ? `${id}-helper` : undefined;
+const c = input(Astro.props);
+---
+
+<div class:list={[c.root, extensions]}>
+  <label class={c.label} for={id}>{label}</label>
+  <input
+    class={c.control}
+    id={id}
+    name={name}
+    type={type}
+    placeholder={placeholder}
+    required={required}
+    disabled={disabled}
+    autocomplete={autocomplete}
+    aria-invalid={invalid ? 'true' : undefined}
+    aria-describedby={helperId}
+  />
+  {helper && <p class={c.helper} id={helperId}>{helper}</p>}
+</div>

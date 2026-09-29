@@ -1,0 +1,49 @@
+---
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import SectionIntro from './SectionIntro.astro';
+
+const edges = [
+  {
+    from: 'Figma → specs',
+    title: 'Leer la intención de diseño',
+    text: 'Un agente lee variables y componentes vía MCP, los normaliza a DTCG y al contrato, y abre un pull request con el diff.',
+    tone: 'discovery',
+  },
+  {
+    from: 'Specs → Figma',
+    title: 'Reconstruir sin pérdida',
+    text: 'Desde el JSON se crean variables, estilos y variantes. La prueba es el viaje de ida y vuelta idéntico byte a byte.',
+    tone: 'prototype',
+  },
+  {
+    from: 'Specs → código',
+    title: 'Transformación determinística',
+    text: 'Style Dictionary y el generador producen CSS, el tema de Tailwind y el contrato TypeScript. Sin inferencia, sin sorpresas.',
+    tone: 'validation',
+  },
+  {
+    from: 'Código → specs',
+    title: 'Devolver lo aprendido',
+    text: 'Las decisiones tomadas en código (capa extensions) se proponen como cambios al contrato, con revisión humana.',
+    tone: 'handoff',
+  },
+] as const;
+---
+
+<section class="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-xl" aria-labelledby="bordes">
+  <SectionIntro id="bordes" eyebrow="Cómo funciona" title="Los cuatro bordes del hub">
+    El repositorio de specs no es la única fuente de verdad: es el lugar donde las fuentes se normalizan, se versionan y se sincronizan.
+  </SectionIntro>
+  <div class="grid gap-stack-lg md:grid-cols-2 lg:grid-cols-4">
+    {
+      edges.map((e) => (
+        <Card>
+          <Badge slot="eyebrow" tone="category" category={e.tone}>{e.from}</Badge>
+          <Fragment slot="title">{e.title}</Fragment>
+          <Fragment slot="description">{e.text}</Fragment>
+        </Card>
+      ))
+    }
+  </div>
+</section>

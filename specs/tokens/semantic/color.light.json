@@ -1,0 +1,283 @@
+{
+  "color": {
+    "$description": "Semánticos de color · modo Light",
+    "bg": {
+      "$type": "color",
+      "canvas": {
+        "$value": "{neutral.100}",
+        "$description": "Fondo de página completa"
+      },
+      "surface-subtle": {
+        "$value": "{neutral.50}",
+        "$description": "Card, modal, panel"
+      },
+      "surface-secondary": {
+        "$value": "{neutral.150}",
+        "$description": "Zonas secundarias: sidebar, bandas de sección"
+      },
+      "surface-strong": {
+        "$value": "{neutral.50}",
+        "$description": "Dropdown, popover (acompaña elevation)"
+      },
+      "surface-dark": {
+        "$value": "{neutral.950}",
+        "$description": "Superficies oscuras: tooltip, footer, bandas de alto contraste"
+      },
+      "brand": {
+        "$value": "{brand.500}",
+        "$description": "Fondo sólido de marca no interactivo"
+      },
+      "brand-subtle": {
+        "$value": "{brand.50}",
+        "$description": "Fondo sutil de marca: destacados"
+      },
+      "fill-primary": {
+        "$value": "{brand.500}",
+        "$description": "Interactivo grande (CTA)"
+      },
+      "fill-primary-hover": {
+        "$value": "{brand.600}"
+      },
+      "fill-primary-active": {
+        "$value": "{brand.700}"
+      },
+      "fill-secondary": {
+        "$value": "{neutral.900}",
+        "$description": "Interactivo sólido secundario"
+      },
+      "fill-secondary-hover": {
+        "$value": "{neutral.800}"
+      },
+      "fill-secondary-active": {
+        "$value": "{neutral.950}"
+      },
+      "fill-muted": {
+        "$value": "{neutral.200}",
+        "$description": "Interactivo pequeño neutro, hover de ghost, badge default"
+      },
+      "fill-muted-hover": {
+        "$value": "{neutral.300}"
+      },
+      "disabled": {
+        "$value": "{neutral.200}",
+        "$description": "Fondo de control deshabilitado"
+      },
+      "field": {
+        "$value": "{neutral.50}",
+        "$description": "Fondo de input/select/textarea"
+      },
+      "success": {
+        "$value": "{success.50}",
+        "$description": "Feedback correcto (sutil)"
+      },
+      "success-solid": {
+        "$value": "{success.600}",
+        "$description": "Feedback correcto (sólido)"
+      },
+      "error": {
+        "$value": "{error.50}",
+        "$description": "Feedback incorrecto (sutil)"
+      },
+      "error-solid": {
+        "$value": "{error.500}",
+        "$description": "Acción destructiva / feedback incorrecto (sólido)"
+      },
+      "error-solid-hover": {
+        "$value": "{error.600}"
+      },
+      "category-terracota": {
+        "$value": "{terracota.100}",
+        "$description": "Tag/badge categórico terracota (sutil)"
+      },
+      "category-terracota-solid": {
+        "$value": "{terracota.700}",
+        "$description": "Tag/badge categórico terracota (sólido)"
+      },
+      "category-cyan": {
+        "$value": "{cyan.100}",
+        "$description": "Tag/badge categórico cyan (sutil)"
+      },
+      "category-cyan-solid": {
+        "$value": "{cyan.700}",
+        "$description": "Tag/badge categórico cyan (sólido)"
+      },
+      "category-gold": {
+        "$value": "{gold.100}",
+        "$description": "Tag/badge categórico gold (sutil)"
+      },
+      "category-gold-solid": {
+        "$value": "{gold.700}",
+        "$description": "Tag/badge categórico gold (sólido)"
+      },
+      "category-discovery": {
+        "$value": "{discovery.100}",
+        "$description": "Tag/badge categórico discovery (sutil)"
+      },
+      "category-discovery-solid": {
+        "$value": "{discovery.700}",
+        "$description": "Tag/badge categórico discovery (sólido)"
+      },
+      "category-prototype": {
+        "$value": "{prototype.100}",
+        "$description": "Tag/badge categórico prototype (sutil)"
+      },
+      "category-prototype-solid": {
+        "$value": "{prototype.700}",
+        "$description": "Tag/badge categórico prototype (sólido)"
+      },
+      "category-validation": {
+        "$value": "{validation.100}",
+        "$description": "Tag/badge categórico validation (sutil)"
+      },
+      "category-validation-solid": {
+        "$value": "{validation.700}",
+        "$description": "Tag/badge categórico validation (sólido)"
+      },
+      "category-handoff": {
+        "$value": "{handoff.100}",
+        "$description": "Tag/badge categórico handoff (sutil)"
+      },
+      "category-handoff-solid": {
+        "$value": "{handoff.700}",
+        "$description": "Tag/badge categórico handoff (sólido)"
+      }
+    },
+    "text": {
+      "$type": "color",
+      "primary": {
+        "$value": "{neutral.950}",
+        "$description": "Texto principal"
+      },
+      "secondary": {
+        "$value": "{neutral.800}",
+        "$description": "Texto secundario"
+      },
+      "tertiary": {
+        "$value": "{neutral.700}",
+        "$description": "Metadata, placeholders"
+      },
+      "disabled": {
+        "$value": "{neutral.500}",
+        "$description": "Texto deshabilitado (exento de contraste AA)"
+      },
+      "brand": {
+        "$value": "{brand.500}",
+        "$description": "Texto de acento de marca (eyebrows)"
+      },
+      "on-brand": {
+        "$value": "{neutral.50}",
+        "$description": "Texto sobre fondo sólido saturado (marca, error, categórico sólido)"
+      },
+      "on-dark": {
+        "$value": "{neutral.50}",
+        "$description": "Texto sobre superficie oscura"
+      },
+      "on-dark-secondary": {
+        "$value": "{neutral.400}",
+        "$description": "Texto secundario sobre superficie oscura"
+      },
+      "link": {
+        "$value": "{brand.500}",
+        "$description": "Enlaces"
+      },
+      "link-hover": {
+        "$value": "{brand.700}"
+      },
+      "success": {
+        "$value": "{success.700}",
+        "$description": "Mensaje de validación correcta"
+      },
+      "error": {
+        "$value": "{error.600}",
+        "$description": "Mensaje de validación incorrecta"
+      },
+      "category-terracota": {
+        "$value": "{terracota.800}",
+        "$description": "Texto de tag categórico terracota"
+      },
+      "category-cyan": {
+        "$value": "{cyan.800}",
+        "$description": "Texto de tag categórico cyan"
+      },
+      "category-gold": {
+        "$value": "{gold.800}",
+        "$description": "Texto de tag categórico gold"
+      },
+      "category-discovery": {
+        "$value": "{discovery.800}",
+        "$description": "Texto de tag categórico discovery"
+      },
+      "category-prototype": {
+        "$value": "{prototype.800}",
+        "$description": "Texto de tag categórico prototype"
+      },
+      "category-validation": {
+        "$value": "{validation.800}",
+        "$description": "Texto de tag categórico validation"
+      },
+      "category-handoff": {
+        "$value": "{handoff.800}",
+        "$description": "Texto de tag categórico handoff"
+      }
+    },
+    "border": {
+      "$type": "color",
+      "subtle": {
+        "$value": "{neutral.200}",
+        "$description": "Separador"
+      },
+      "default": {
+        "$value": "{neutral.300}",
+        "$description": "Borde estándar decorativo"
+      },
+      "strong": {
+        "$value": "{neutral.600}",
+        "$description": "Borde con contraste no-textual ≥ 3:1 (controles)"
+      },
+      "focus": {
+        "$value": "{brand.500}",
+        "$description": "Foco: siempre brand"
+      },
+      "success": {
+        "$value": "{success.600}",
+        "$description": "Validación correcta"
+      },
+      "error": {
+        "$value": "{error.500}",
+        "$description": "Validación incorrecta"
+      },
+      "field": {
+        "$value": "{neutral.600}",
+        "$description": "Borde de campo en reposo (≥ 3:1, WCAG 1.4.11)"
+      },
+      "field-hover": {
+        "$value": "{neutral.700}"
+      },
+      "field-focus": {
+        "$value": "{brand.500}"
+      },
+      "field-invalid": {
+        "$value": "{error.500}"
+      },
+      "on-dark": {
+        "$value": "{neutral.800}",
+        "$description": "Separador sobre superficie oscura"
+      }
+    },
+    "icon": {
+      "$type": "color",
+      "default": {
+        "$value": "{neutral.800}",
+        "$description": "Icono estándar"
+      },
+      "on-brand": {
+        "$value": "{neutral.50}",
+        "$description": "Icono sobre fondo de marca"
+      },
+      "brand": {
+        "$value": "{brand.500}",
+        "$description": "Icono de acento"
+      }
+    }
+  }
+}

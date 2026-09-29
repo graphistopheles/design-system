@@ -1,0 +1,30 @@
+---
+import SectionIntro from './SectionIntro.astro';
+
+const checks = [
+  { name: 'Esquema', text: 'Cada contrato se valida contra JSON Schema.' },
+  { name: 'Solo semánticos', text: 'Ningún componente referencia un primitivo; el build falla si ocurre.' },
+  { name: 'Contraste AA', text: 'Todas las combinaciones de variantes y estados, calculadas.' },
+  { name: 'Lint de consumo', text: 'Sin hex, px ni valores arbitrarios de Tailwind en la landing.' },
+  { name: 'Semver', text: 'Quitar una prop es major; agregar una parte, minor; cambiar un token, patch.' },
+  { name: 'Generado al día', text: 'El código generado debe coincidir con los specs del commit.' },
+];
+---
+
+<section class="bg-surface-dark" aria-labelledby="ci">
+  <div class="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-xl">
+    <SectionIntro id="ci" eyebrow="Gobierno" title="Lo que el CI verifica en cada pull request" tone="dark">
+      La discusión sobre si un cambio rompe algo deja de ser una opinión: es el resultado de comparar dos contratos.
+    </SectionIntro>
+    <ul class="grid gap-stack-lg md:grid-cols-2 lg:grid-cols-3">
+      {
+        checks.map((c) => (
+          <li class="flex flex-col gap-stack-xs border-t border-on-dark pt-inset-md">
+            <span class="text-label-1 text-on-dark">{c.name}</span>
+            <span class="text-body-4 text-on-dark-secondary">{c.text}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

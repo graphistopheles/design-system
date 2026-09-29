@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema/component.schema.json",
+  "name": "Header",
+  "version": "1.0.0",
+  "status": "stable",
+  "level": "organism",
+  "purpose": "Identifica el sitio y da acceso a las secciones principales y a la acción prioritaria.",
+  "figma": {
+    "component": "Header",
+    "nodeId": "1:2145"
+  },
+  "props": {
+    "brand": {
+      "type": "slot",
+      "required": true
+    },
+    "links": {
+      "type": "slot",
+      "description": "Lista de { label, href }. Máximo 5."
+    },
+    "action": {
+      "type": "slot",
+      "description": "Un Button (normalmente primary, size sm)."
+    },
+    "sticky": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "anatomy": {
+    "root": {
+      "description": "Banda superior",
+      "element": "header"
+    },
+    "inner": {
+      "description": "Contenedor centrado",
+      "element": "div"
+    },
+    "brand": {
+      "description": "Marca / home",
+      "element": "a"
+    },
+    "nav": {
+      "description": "Navegación principal",
+      "element": "nav"
+    },
+    "link": {
+      "description": "Enlace de navegación",
+      "element": "a"
+    },
+    "actions": {
+      "description": "Acciones",
+      "element": "div",
+      "optional": true
+    }
+  },
+  "base": {
+    "root": {
+      "background": "color.bg.surface-subtle",
+      "border-color": "color.border.subtle",
+      "border-bottom-width": "border-width.default",
+      "layout": {
+        "width": "full"
+      }
+    },
+    "inner": {
+      "max-width": "size.container.content",
+      "padding-inline": "space.inset.lg",
+      "padding-block": "space.inset.sm",
+      "gap": "space.inline.xl",
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "between",
+        "center": true
+      }
+    },
+    "brand": {
+      "typography": "typography.label-1",
+      "color": "color.text.primary",
+      "gap": "space.inline.sm",
+      "layout": {
+        "display": "inline-flex",
+        "align": "center"
+      }
+    },
+    "nav": {
+      "gap": "space.inline.xl",
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      }
+    },
+    "link": {
+      "typography": "typography.label-2",
+      "color": "color.text.secondary",
+      "radius": "radius.tag",
+      "layout": {
+        "transition": "colors"
+      }
+    },
+    "actions": {
+      "gap": "space.inline.sm",
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      }
+    }
+  },
+  "states": {
+    "hover": {
+      "link": {
+        "color": "color.text.primary"
+      }
+    },
+    "focus-visible": {
+      "link": {
+        "outline-color": "color.border.focus",
+        "outline-width": "border-width.focus",
+        "layout": {
+          "outline": "solid"
+        }
+      },
+      "brand": {
+        "outline-color": "color.border.focus",
+        "outline-width": "border-width.focus",
+        "layout": {
+          "outline": "solid"
+        }
+      }
+    }
+  },
+  "variants": {
+    "sticky": {
+      "true": {
+        "root": {
+          "z-index": "z.sticky",
+          "layout": {
+            "position": "sticky",
+            "pin": "top"
+          }
+        }
+      },
+      "false": {
+        "root": {}
+      }
+    }
+  },
+  "requirements": [
+    "requirements/general.md",
+    "requirements/header.a11y.md"
+  ],
+  "examples": [
+    {
+      "name": "Landing",
+      "props": {
+        "sticky": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,312 @@
+{
+  "$schema": "../schema/component.schema.json",
+  "name": "Badge",
+  "version": "1.0.0",
+  "status": "stable",
+  "level": "atom",
+  "purpose": "Etiqueta breve y no interactiva que comunica estado (feedback) o clasificación (categoría).",
+  "figma": {
+    "component": "Badge",
+    "nodeId": "1:1983"
+  },
+  "props": {
+    "tone": {
+      "type": "enum",
+      "values": [
+        "neutral",
+        "success",
+        "error",
+        "category"
+      ],
+      "default": "neutral",
+      "description": "success/error significan correcto/incorrecto. Para clasificar usa category: nunca el rojo de error para decorar."
+    },
+    "category": {
+      "type": "enum",
+      "values": [
+        "terracota",
+        "cyan",
+        "gold",
+        "discovery",
+        "prototype",
+        "validation",
+        "handoff"
+      ],
+      "default": "terracota",
+      "description": "Solo aplica con tone=category."
+    },
+    "emphasis": {
+      "type": "enum",
+      "values": [
+        "subtle",
+        "solid"
+      ],
+      "default": "subtle"
+    },
+    "label": {
+      "type": "slot",
+      "required": true,
+      "description": "1 a 3 palabras, sentence case."
+    }
+  },
+  "anatomy": {
+    "root": {
+      "description": "Contenedor",
+      "element": "span"
+    }
+  },
+  "base": {
+    "root": {
+      "padding-inline": "space.inset.sm",
+      "padding-block": "space.inset.xs",
+      "radius": "radius.tag",
+      "typography": "typography.label-3",
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "whitespace": "nowrap"
+      }
+    }
+  },
+  "variants": {
+    "tone": {
+      "neutral": {
+        "root": {
+          "background": "color.bg.fill-muted",
+          "color": "color.text.secondary"
+        }
+      },
+      "success": {
+        "root": {}
+      },
+      "error": {
+        "root": {}
+      },
+      "category": {
+        "root": {}
+      }
+    }
+  },
+  "compounds": [
+    {
+      "when": {
+        "tone": "success",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.success",
+        "color": "color.text.success"
+      }
+    },
+    {
+      "when": {
+        "tone": "success",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.success-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "error",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.error",
+        "color": "color.text.error"
+      }
+    },
+    {
+      "when": {
+        "tone": "error",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.error-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "terracota",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-terracota",
+        "color": "color.text.category-terracota"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "terracota",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-terracota-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "cyan",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-cyan",
+        "color": "color.text.category-cyan"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "cyan",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-cyan-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "gold",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-gold",
+        "color": "color.text.category-gold"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "gold",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-gold-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "discovery",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-discovery",
+        "color": "color.text.category-discovery"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "discovery",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-discovery-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "prototype",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-prototype",
+        "color": "color.text.category-prototype"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "prototype",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-prototype-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "validation",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-validation",
+        "color": "color.text.category-validation"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "validation",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-validation-solid",
+        "color": "color.text.on-brand"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "handoff",
+        "emphasis": "subtle"
+      },
+      "root": {
+        "background": "color.bg.category-handoff",
+        "color": "color.text.category-handoff"
+      }
+    },
+    {
+      "when": {
+        "tone": "category",
+        "category": "handoff",
+        "emphasis": "solid"
+      },
+      "root": {
+        "background": "color.bg.category-handoff-solid",
+        "color": "color.text.on-brand"
+      }
+    }
+  ],
+  "requirements": [
+    "requirements/general.md",
+    "requirements/badge.a11y.md"
+  ],
+  "examples": [
+    {
+      "name": "Fase de proceso",
+      "props": {
+        "tone": "category",
+        "category": "discovery"
+      },
+      "content": {
+        "label": "Descubrimiento"
+      }
+    },
+    {
+      "name": "Estado correcto",
+      "props": {
+        "tone": "success",
+        "emphasis": "solid"
+      },
+      "content": {
+        "label": "Publicado"
+      }
+    }
+  ]
+}

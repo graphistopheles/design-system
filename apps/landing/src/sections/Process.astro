@@ -1,0 +1,34 @@
+---
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import SectionIntro from './SectionIntro.astro';
+
+const phases = [
+  { tone: 'discovery', phase: 'Descubrimiento', title: 'Proponer', text: 'Un cambio nace en Figma o en código. El agente lo expresa como diff del spec y abre un pull request.' },
+  { tone: 'prototype', phase: 'Prototipo', title: 'Generar', text: 'El CI regenera tokens, tema y contratos. La landing de preview muestra el cambio aplicado.' },
+  { tone: 'validation', phase: 'Validación', title: 'Verificar', text: 'Esquema, tokens semánticos, contraste AA y clasificación semver automática desde el diff.' },
+  { tone: 'handoff', phase: 'Entrega', title: 'Publicar', text: 'Merge, changelog y sincronización hacia Figma. Diseño y código quedan en la misma versión.' },
+] as const;
+---
+
+<section class="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-xl" aria-labelledby="proceso">
+  <SectionIntro id="proceso" eyebrow="Proceso" title="De la propuesta a la publicación">
+    Cada cambio recorre las mismas cuatro fases, y cada fase tiene su color categórico en el sistema.
+  </SectionIntro>
+  <ol class="grid gap-stack-lg md:grid-cols-2 lg:grid-cols-4">
+    {
+      phases.map((p, i) => (
+        <li class="flex">
+          <Card class="w-full" padding="md">
+            <div slot="eyebrow" class="flex items-center justify-between gap-inline-sm">
+              <Badge tone="category" category={p.tone} emphasis="solid">{p.phase}</Badge>
+              <span class="font-code text-caption-1 text-tertiary">0{i + 1}</span>
+            </div>
+            <Fragment slot="title">{p.title}</Fragment>
+            <Fragment slot="description">{p.text}</Fragment>
+          </Card>
+        </li>
+      ))
+    }
+  </ol>
+</section>

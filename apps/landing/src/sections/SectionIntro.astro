@@ -1,0 +1,16 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  id: string;
+  tone?: 'light' | 'dark';
+}
+const { eyebrow, title, id, tone = 'light' } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<div class="flex flex-col gap-stack-sm max-w-prose">
+  <p class:list={['text-label-2', dark ? 'text-on-dark-secondary' : 'text-brand']}>{eyebrow}</p>
+  <h2 id={id} class:list={['text-heading-h2', dark ? 'text-on-dark' : 'text-primary']}>{title}</h2>
+  <p class:list={['text-body-2', dark ? 'text-on-dark-secondary' : 'text-secondary']}><slot /></p>
+</div>

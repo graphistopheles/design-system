@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ds-ia.local/schema/component.schema.json",
+  "title": "Contrato de componente (DS-IA)",
+  "description": "Contrato que describe un componente de forma completa y verificable. Fuente para Figma (propiedades y variantes), código (tipos y clases) y validación (tokens, contraste, semver). Ver ADR-0003.",
+  "type": "object",
+  "required": ["name", "version", "status", "level", "purpose", "props", "anatomy", "base"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z]+$",
+      "description": "Nombre por estructura, no por contenido (Card, no ProductCard). Igual en Figma y en código."
+    },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "status": { "enum": ["proposed", "under-review", "accepted", "stable", "deprecated"] },
+    "level": { "enum": ["atom", "molecule", "organism"] },
+    "purpose": { "type": "string", "minLength": 10, "description": "Qué necesidad de usuario resuelve, en una frase." },
+    "figma": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "component": { "type": "string", "description": "Nombre del component set en Figma." },
+        "nodeId": { "type": ["string", "null"], "description": "Se completa cuando el componente existe en Figma." }
+      }
+    },
+    "props": {
+      "type": "object",
+      "description": "API pública. Quitar o renombrar una prop es un cambio MAJOR.",
+      "additionalProperties": { "$ref": "#/$defs/prop" }
+    },
+    "anatomy": {
+      "type": "object",
+      "description": "Partes con nombre. Agregar una parte es MINOR; quitarla es MAJOR.",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/part" }
+    },
+    "base": { "$ref": "#/$defs/elementStyles", "description": "Estilos comunes a todas las variantes." },
+    "states": { "$ref": "#/$defs/states" },
+    "variants": {
+      "type": "object",
+      "description": "Estilos por valor de prop: { prop: { valor: { parte: estilos, states: {...} } } }. Máximo 5 valores visuales por prop.",
+      "additionalProperties": {
+        "type": "object",
+        "maxProperties": 5,
+        "additionalProperties": { "$ref": "#/$defs/variantEntry" }
+      }
+    },
+    "compounds": {
+      "type": "array",
+      "description": "Estilos que dependen de una combinación de props.",
+      "items": {
+        "type": "object",
+        "required": ["when"],
+        "properties": {
+          "when": { "type": "object", "additionalProperties": { "type": ["string", "boolean"] } }
+        },
+        "additionalProperties": true
+      }
+    },
+    "contrast": {
+      "type": "array",
+      "description": "Pares texto/fondo que el CI verifica (WCAG 2.2 AA). Los pares de cada variante se derivan automáticamente; aquí van los adicionales.",
+      "items": {
+        "type": "object",
+        "required": ["fg", "bg"],
+        "properties": { "fg": { "type": "string" }, "bg": { "type": "string" }, "min": { "type": "number" } }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "description": "Requisitos redactados (MUST/SHOULD) en /specs/requirements.",
+      "items": { "type": "string", "pattern": "^requirements/.+\\.md$" }
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "props"],
+        "properties": {
+          "name": { "type": "string" },
+          "props": { "type": "object" },
+          "content": { "type": "object" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "prop": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["enum", "boolean", "string", "slot"] },
+        "values": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "default": {},
+        "required": { "type": "boolean" },
+        "description": { "type": "string" }
+      },
+      "if": { "properties": { "type": { "const": "enum" } } },
+      "then": { "required": ["values", "default"] }
+    },
+    "part": {
+      "type": "object",
+      "required": ["description"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "element": { "type": "string", "description": "Elemento HTML sugerido." },
+        "optional": { "type": "boolean" }
+      }
+    },
+    "styles": {
+      "type": "object",
+      "description": "Propiedades de estilo. Cada valor es la ruta de un token SEMÁNTICO (p. ej. color.bg.fill-primary). El validador comprueba que exista y que su grupo sea compatible con la propiedad.",
+      "additionalProperties": false,
+      "properties": {
+        "background": { "type": "string", "pattern": "^color\\.bg\\." },
+        "color": { "type": "string", "pattern": "^color\\.(text|icon)\\." },
+        "border-color": { "type": "string", "pattern": "^color\\.border\\." },
+        "border-width": { "type": "string", "pattern": "^border-width\\." },
+        "border-bottom-width": { "type": "string", "pattern": "^border-width\\." },
+        "border-top-width": { "type": "string", "pattern": "^border-width\\." },
+        "outline-color": { "type": "string", "pattern": "^color\\.border\\." },
+        "outline-width": { "type": "string", "pattern": "^border-width\\." },
+        "radius": { "type": "string", "pattern": "^radius\\." },
+        "height": { "type": "string", "pattern": "^size\\.(interactive|control|icon|avatar)\\." },
+        "min-height": { "type": "string", "pattern": "^size\\.(interactive|control|icon|avatar)\\." },
+        "size": { "type": "string", "pattern": "^size\\.(control|icon|avatar)\\." },
+        "max-width": { "type": "string", "pattern": "^size\\.container\\." },
+        "padding": { "type": "string", "pattern": "^space\\.inset\\." },
+        "padding-inline": { "type": "string", "pattern": "^space\\.inset\\." },
+        "padding-block": { "type": "string", "pattern": "^space\\.inset\\." },
+        "gap": { "type": "string", "pattern": "^space\\.(stack|inline)\\." },
+        "typography": { "type": "string", "pattern": "^typography\\.[a-z0-9-]+$" },
+        "shadow": { "type": "string", "pattern": "^shadow\\." },
+        "z-index": { "type": "string", "pattern": "^z\\." },
+        "opacity": { "type": "string", "pattern": "^opacity\\." },
+        "layout": { "$ref": "#/$defs/layout" }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "description": "Decisiones estructurales sin token (no son valores de diseño).",
+      "additionalProperties": false,
+      "properties": {
+        "display": { "enum": ["flex", "inline-flex", "grid", "block", "inline-block", "none"] },
+        "direction": { "enum": ["row", "column"] },
+        "align": { "enum": ["start", "center", "end", "stretch", "baseline"] },
+        "justify": { "enum": ["start", "center", "end", "between"] },
+        "wrap": { "type": "boolean" },
+        "width": { "enum": ["full", "auto", "fit"] },
+        "position": { "enum": ["static", "relative", "sticky"] },
+        "pin": { "enum": ["top"] },
+        "center": { "type": "boolean", "description": "Centra horizontalmente (margin-inline: auto)." },
+        "cursor": { "enum": ["pointer", "not-allowed"] },
+        "transition": { "enum": ["colors", "shadow", "all"] },
+        "whitespace": { "enum": ["nowrap"] },
+        "select": { "enum": ["none"] },
+        "outline": { "enum": ["none", "solid"] }
+      }
+    },
+    "elementStyles": {
+      "type": "object",
+      "description": "Estilos por parte de la anatomía.",
+      "additionalProperties": { "$ref": "#/$defs/styles" }
+    },
+    "states": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hover": { "$ref": "#/$defs/elementStyles" },
+        "active": { "$ref": "#/$defs/elementStyles" },
+        "focus": { "$ref": "#/$defs/elementStyles" },
+        "focus-visible": { "$ref": "#/$defs/elementStyles" },
+        "disabled": { "$ref": "#/$defs/elementStyles" },
+        "invalid": { "$ref": "#/$defs/elementStyles" }
+      }
+    },
+    "variantEntry": {
+      "type": "object",
+      "description": "Estilos por parte + estados propios de la variante.",
+      "properties": { "states": { "$ref": "#/$defs/states" }, "description": { "type": "string" } },
+      "additionalProperties": { "$ref": "#/$defs/styles" }
+    }
+  }
+}

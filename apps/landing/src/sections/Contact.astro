@@ -1,0 +1,19 @@
+---
+import Input from '../components/Input.astro';
+import Button from '../components/Button.astro';
+import SectionIntro from './SectionIntro.astro';
+---
+
+<section class="mx-auto max-w-content px-inset-lg py-inset-2xl grid gap-stack-xl lg:grid-cols-2 items-start" aria-labelledby="contacto">
+  <SectionIntro id="contacto" eyebrow="Siguiente paso" title="Conectar Figma al hub">
+    La cadena en código ya funciona. Lo que sigue es preparar las colecciones de variables en Figma y activar los agentes de los cuatro bordes.
+  </SectionIntro>
+  <form class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex flex-col gap-stack-md" action="#contacto">
+    <Input label="Correo de trabajo" name="email" type="email" autocomplete="email" required placeholder="nombre@empresa.com" helper="Solo para esta demo: el formulario no envía datos." />
+    <Input label="Archivo de Figma" name="figma" type="url" placeholder="https://www.figma.com/design/…" />
+    <div class="flex flex-wrap gap-inline-md">
+      <Button type="submit">Quiero la demo</Button>
+      <Button type="reset" variant="ghost">Limpiar</Button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,267 @@
+{
+  "$schema": "../schema/component.schema.json",
+  "name": "Button",
+  "version": "1.0.0",
+  "status": "stable",
+  "level": "atom",
+  "purpose": "Dispara una acción o navega a un destino con una etiqueta de verbo clara.",
+  "figma": {
+    "component": "Button",
+    "nodeId": "1:1925"
+  },
+  "props": {
+    "variant": {
+      "type": "enum",
+      "values": [
+        "primary",
+        "secondary",
+        "outline",
+        "ghost",
+        "destructive"
+      ],
+      "default": "primary",
+      "description": "Jerarquía visual. Un solo primary por vista."
+    },
+    "size": {
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "md cumple el mínimo táctil de 44px. sm solo en densidad alta con escritorio."
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "href": {
+      "type": "string",
+      "description": "Si existe, se renderiza como <a>. Un enlace nunca se deshabilita."
+    },
+    "type": {
+      "type": "enum",
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ],
+      "default": "button"
+    },
+    "label": {
+      "type": "slot",
+      "required": true,
+      "description": "Verbo en sentence case, sin punto final."
+    },
+    "icon": {
+      "type": "slot",
+      "description": "Icono opcional a la derecha."
+    }
+  },
+  "anatomy": {
+    "root": {
+      "description": "Contenedor interactivo",
+      "element": "button | a"
+    },
+    "label": {
+      "description": "Texto del botón",
+      "element": "span"
+    },
+    "icon": {
+      "description": "Icono decorativo (aria-hidden)",
+      "element": "span",
+      "optional": true
+    }
+  },
+  "base": {
+    "root": {
+      "height": "size.interactive.md",
+      "padding-inline": "space.inset.md",
+      "gap": "space.inline.sm",
+      "radius": "radius.interactive",
+      "typography": "typography.label-2",
+      "layout": {
+        "display": "inline-flex",
+        "align": "center",
+        "justify": "center",
+        "cursor": "pointer",
+        "transition": "colors",
+        "whitespace": "nowrap",
+        "select": "none"
+      }
+    },
+    "icon": {
+      "size": "size.icon.sm",
+      "layout": {
+        "display": "inline-flex"
+      }
+    }
+  },
+  "states": {
+    "focus-visible": {
+      "root": {
+        "outline-color": "color.border.focus",
+        "outline-width": "border-width.focus",
+        "layout": {
+          "outline": "solid"
+        }
+      }
+    },
+    "disabled": {
+      "root": {
+        "background": "color.bg.disabled",
+        "color": "color.text.disabled",
+        "layout": {
+          "cursor": "not-allowed"
+        }
+      }
+    }
+  },
+  "variants": {
+    "variant": {
+      "primary": {
+        "root": {
+          "background": "color.bg.fill-primary",
+          "color": "color.text.on-brand"
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "background": "color.bg.fill-primary-hover"
+            }
+          },
+          "active": {
+            "root": {
+              "background": "color.bg.fill-primary-active"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "root": {
+          "background": "color.bg.fill-secondary",
+          "color": "color.text.on-dark"
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "background": "color.bg.fill-secondary-hover"
+            }
+          },
+          "active": {
+            "root": {
+              "background": "color.bg.fill-secondary-active"
+            }
+          }
+        }
+      },
+      "outline": {
+        "root": {
+          "border-color": "color.border.strong",
+          "border-width": "border-width.default",
+          "color": "color.text.primary"
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "background": "color.bg.fill-muted"
+            }
+          },
+          "active": {
+            "root": {
+              "background": "color.bg.fill-muted-hover"
+            }
+          }
+        }
+      },
+      "ghost": {
+        "root": {
+          "color": "color.text.primary"
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "background": "color.bg.fill-muted"
+            }
+          },
+          "active": {
+            "root": {
+              "background": "color.bg.fill-muted-hover"
+            }
+          }
+        }
+      },
+      "destructive": {
+        "root": {
+          "background": "color.bg.error-solid",
+          "color": "color.text.on-brand"
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "background": "color.bg.error-solid-hover"
+            }
+          }
+        }
+      }
+    },
+    "size": {
+      "sm": {
+        "root": {
+          "height": "size.interactive.sm",
+          "padding-inline": "space.inset.sm",
+          "typography": "typography.label-3"
+        }
+      },
+      "md": {
+        "root": {}
+      },
+      "lg": {
+        "root": {
+          "height": "size.interactive.lg",
+          "padding-inline": "space.inset.lg",
+          "typography": "typography.label-1"
+        },
+        "icon": {
+          "size": "size.icon.md"
+        }
+      }
+    }
+  },
+  "requirements": [
+    "requirements/general.md",
+    "requirements/button.a11y.md"
+  ],
+  "examples": [
+    {
+      "name": "CTA principal del hero",
+      "props": {
+        "variant": "primary",
+        "size": "lg"
+      },
+      "content": {
+        "label": "Explorar el sistema"
+      }
+    },
+    {
+      "name": "Acción secundaria",
+      "props": {
+        "variant": "outline",
+        "size": "lg"
+      },
+      "content": {
+        "label": "Ver en GitHub"
+      }
+    },
+    {
+      "name": "Acción destructiva",
+      "props": {
+        "variant": "destructive"
+      },
+      "content": {
+        "label": "Eliminar"
+      }
+    }
+  ]
+}

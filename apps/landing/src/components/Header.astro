@@ -1,0 +1,22 @@
+---
+// Scaffold sobre specs/components/header.spec.json
+import { header, type HeaderContract } from './generated';
+
+interface Props extends HeaderContract {
+  links: { label: string; href: string }[];
+  homeHref?: string;
+}
+const { links, homeHref = '#top' } = Astro.props;
+const c = header(Astro.props);
+---
+
+<header class={c.root}>
+  <div class={c.inner}>
+    <a class={c.brand} href={homeHref}><slot name="brand" /></a>
+    <!-- extension: responsive. El contrato aún no expresa breakpoints (ver ADR-0003, "Otras consideraciones"). -->
+    <nav class:list={[c.nav, 'hidden md:flex']} aria-label="Principal">
+      {links.map((l) => <a class={c.link} href={l.href}>{l.label}</a>)}
+    </nav>
+    {Astro.slots.has('actions') && <div class={c.actions}><slot name="actions" /></div>}
+  </div>
+</header>

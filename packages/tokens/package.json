@@ -1,0 +1,16 @@
+{
+  "name": "@ds-ia/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Transformación determinística de /specs/tokens (DTCG) a CSS, Tailwind v4, TypeScript y JSON para Figma",
+  "exports": {
+    "./tokens.css": "./dist/tokens.css",
+    "./theme.css": "./dist/theme.css",
+    "./tokens": "./dist/tokens.js",
+    "./tokens.json": "./dist/tokens.json",
+    "./figma-variables.json": "./dist/figma-variables.json"
+  },
+  "scripts": { "build": "node build.mjs" },
+  "devDependencies": { "style-dictionary": "^4.4.0" }
+}

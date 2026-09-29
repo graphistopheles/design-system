@@ -1,0 +1,158 @@
+{
+  "$schema": "../schema/component.schema.json",
+  "name": "Card",
+  "version": "1.0.0",
+  "status": "stable",
+  "level": "molecule",
+  "purpose": "Agrupa contenido relacionado sobre una superficie delimitada para escanearlo como una unidad.",
+  "figma": {
+    "component": "Card",
+    "nodeId": "1:2115"
+  },
+  "props": {
+    "padding": {
+      "type": "enum",
+      "values": [
+        "md",
+        "lg"
+      ],
+      "default": "lg"
+    },
+    "interactive": {
+      "type": "boolean",
+      "default": false,
+      "description": "Toda la card es un enlace (requiere href)."
+    },
+    "href": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "slot",
+      "description": "Badge o metadato superior."
+    },
+    "title": {
+      "type": "slot",
+      "required": true
+    },
+    "description": {
+      "type": "slot"
+    },
+    "footer": {
+      "type": "slot"
+    }
+  },
+  "anatomy": {
+    "root": {
+      "description": "Superficie",
+      "element": "article | a"
+    },
+    "eyebrow": {
+      "description": "Zona superior",
+      "element": "div",
+      "optional": true
+    },
+    "title": {
+      "description": "Título de la card",
+      "element": "h3"
+    },
+    "description": {
+      "description": "Texto de apoyo",
+      "element": "p",
+      "optional": true
+    },
+    "footer": {
+      "description": "Acciones o metadatos",
+      "element": "div",
+      "optional": true
+    }
+  },
+  "base": {
+    "root": {
+      "background": "color.bg.surface-subtle",
+      "border-color": "color.border.subtle",
+      "border-width": "border-width.default",
+      "radius": "radius.surface",
+      "gap": "space.stack.sm",
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "transition": "shadow"
+      }
+    },
+    "title": {
+      "typography": "typography.heading-h5",
+      "color": "color.text.primary"
+    },
+    "description": {
+      "typography": "typography.body-4",
+      "color": "color.text.secondary"
+    },
+    "footer": {
+      "gap": "space.inline.sm",
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "wrap": true
+      }
+    }
+  },
+  "variants": {
+    "padding": {
+      "md": {
+        "root": {
+          "padding": "space.inset.md"
+        }
+      },
+      "lg": {
+        "root": {
+          "padding": "space.inset.lg"
+        }
+      }
+    },
+    "interactive": {
+      "true": {
+        "root": {
+          "layout": {
+            "cursor": "pointer"
+          }
+        },
+        "states": {
+          "hover": {
+            "root": {
+              "shadow": "shadow.floating",
+              "border-color": "color.border.default"
+            }
+          },
+          "focus-visible": {
+            "root": {
+              "outline-color": "color.border.focus",
+              "outline-width": "border-width.focus",
+              "layout": {
+                "outline": "solid"
+              }
+            }
+          }
+        }
+      },
+      "false": {
+        "root": {}
+      }
+    }
+  },
+  "requirements": [
+    "requirements/general.md",
+    "requirements/card.a11y.md"
+  ],
+  "examples": [
+    {
+      "name": "Feature",
+      "props": {
+        "padding": "lg"
+      },
+      "content": {
+        "title": "Tokens en 3 capas",
+        "description": "Primitivos, semánticos y de componente."
+      }
+    }
+  ]
+}

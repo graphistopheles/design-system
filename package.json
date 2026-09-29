@@ -1,0 +1,31 @@
+{
+  "name": "ds-ia",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Prueba de concepto: sistema de diseño spec-driven conectado a Figma y a una landing Astro + Tailwind",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "setup": "node scripts/install-protected.mjs",
+    "tokens": "npm run build -w @ds-ia/tokens",
+    "generate": "node scripts/generate-components.mjs",
+    "validate": "node scripts/validate-specs.mjs",
+    "lint:consumption": "node scripts/lint-consumption.mjs",
+    "diff": "node scripts/spec-diff.mjs",
+    "check": "npm run tokens && npm run validate && npm run generate && npm run lint:consumption",
+    "dev": "npm run tokens && npm run generate && npm run dev -w @ds-ia/landing",
+    "build": "npm run check && npm run build -w @ds-ia/landing",
+    "preview": "npm run preview -w @ds-ia/landing",
+    "roundtrip": "node scripts/figma-roundtrip.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

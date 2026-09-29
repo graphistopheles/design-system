@@ -1,0 +1,32 @@
+---
+import Card from '../components/Card.astro';
+import SectionIntro from './SectionIntro.astro';
+
+const layers = [
+  { n: '1', name: 'Primitivos', example: 'brand/500 · space/4 · radius/md', text: 'Valores crudos: 11 paletas y escalas cerradas. Sin scope en Figma, nunca publicados. Ningún componente los toca.' },
+  { n: '2', name: 'Semánticos', example: 'color/bg/fill-primary · space/inset/md', text: 'Decisiones de uso con la fórmula type · element · role · emphasis · state. Son lo único que consumen los componentes.' },
+  { n: '3', name: 'Componente', example: 'button-primary-bg-hover', text: 'Excepciones puntuales. La capa existe, pero está vacía a propósito: cada entrada necesita un ADR.' },
+];
+---
+
+<section class="bg-surface-secondary border-y border-subtle" aria-labelledby="tokens">
+  <div class="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-xl">
+    <SectionIntro id="tokens" eyebrow="Tokens" title="Tres capas, una regla">
+      Un componente nunca consume un primitivo. Si ningún semántico resuelve el caso, se crea el semántico antes de aplicar nada. El build falla si alguien lo intenta.
+    </SectionIntro>
+    <ol class="grid gap-stack-lg md:grid-cols-3">
+      {
+        layers.map((l) => (
+          <li class="flex">
+            <Card class="w-full">
+              <span slot="eyebrow" class="text-label-3 text-tertiary">Capa {l.n}</span>
+              <Fragment slot="title">{l.name}</Fragment>
+              <Fragment slot="description">{l.text}</Fragment>
+              <code slot="footer" class="font-code text-body-5 text-secondary">{l.example}</code>
+            </Card>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

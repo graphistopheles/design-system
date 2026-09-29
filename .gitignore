@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+spec-diff.md
+.DS_Store
+*.log
+.env
+scripts/figma/.roundtrip-input.json

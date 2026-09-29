@@ -1,0 +1,22 @@
+---
+// Scaffold sobre specs/components/card.spec.json
+import { card, type CardContract } from './generated';
+
+interface Props extends CardContract {
+  class?: string;
+  /** Nivel del encabezado según la jerarquía de la página (el estilo sigue siendo heading-h5). */
+  headingLevel?: 'h2' | 'h3' | 'h4';
+}
+const { class: extensions, href, interactive = false, headingLevel = 'h3' } = Astro.props;
+const c = card(Astro.props);
+const Root = interactive && href ? 'a' : 'article';
+const Heading = headingLevel;
+---
+
+<Root class:list={[c.root, extensions]} href={Root === 'a' ? href : undefined}>
+  {Astro.slots.has('eyebrow') && <div class={c.eyebrow}><slot name="eyebrow" /></div>}
+  <Heading class={c.title}><slot name="title" /></Heading>
+  {Astro.slots.has('description') && <p class={c.description}><slot name="description" /></p>}
+  <slot />
+  {Astro.slots.has('footer') && <div class={c.footer}><slot name="footer" /></div>}
+</Root>

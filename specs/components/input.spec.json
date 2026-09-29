@@ -1,0 +1,188 @@
+{
+  "$schema": "../schema/component.schema.json",
+  "name": "Input",
+  "version": "1.0.0",
+  "status": "stable",
+  "level": "molecule",
+  "purpose": "Permite escribir un valor de una línea con etiqueta visible y mensaje de ayuda o error.",
+  "figma": {
+    "component": "Input",
+    "nodeId": "1:2025"
+  },
+  "props": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Siempre visible. El placeholder no reemplaza al label."
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enum",
+      "values": [
+        "text",
+        "email",
+        "url",
+        "search"
+      ],
+      "default": "text"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "helper": {
+      "type": "string",
+      "description": "Ayuda o, si invalid, el mensaje de error (nunca culpabiliza al usuario)."
+    },
+    "invalid": {
+      "type": "boolean",
+      "default": false
+    },
+    "required": {
+      "type": "boolean",
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "anatomy": {
+    "root": {
+      "description": "Contenedor del campo",
+      "element": "div"
+    },
+    "label": {
+      "description": "Etiqueta",
+      "element": "label"
+    },
+    "control": {
+      "description": "Campo editable",
+      "element": "input"
+    },
+    "helper": {
+      "description": "Ayuda o error",
+      "element": "p",
+      "optional": true
+    }
+  },
+  "base": {
+    "root": {
+      "gap": "space.stack.xs",
+      "layout": {
+        "display": "flex",
+        "direction": "column",
+        "width": "full"
+      }
+    },
+    "label": {
+      "typography": "typography.label-2",
+      "color": "color.text.primary"
+    },
+    "control": {
+      "height": "size.interactive.md",
+      "padding-inline": "space.inset.md",
+      "radius": "radius.interactive",
+      "background": "color.bg.field",
+      "border-color": "color.border.field",
+      "border-width": "border-width.default",
+      "typography": "typography.body-3",
+      "color": "color.text.primary",
+      "layout": {
+        "width": "full",
+        "transition": "colors",
+        "outline": "none"
+      }
+    },
+    "helper": {
+      "typography": "typography.body-4",
+      "color": "color.text.tertiary"
+    }
+  },
+  "states": {
+    "hover": {
+      "control": {
+        "border-color": "color.border.field-hover"
+      }
+    },
+    "focus": {
+      "control": {
+        "border-color": "color.border.field-focus",
+        "outline-color": "color.border.focus",
+        "outline-width": "border-width.default",
+        "layout": {
+          "outline": "solid"
+        }
+      }
+    },
+    "disabled": {
+      "control": {
+        "background": "color.bg.disabled",
+        "color": "color.text.disabled",
+        "layout": {
+          "cursor": "not-allowed"
+        }
+      }
+    }
+  },
+  "variants": {
+    "invalid": {
+      "true": {
+        "control": {
+          "border-color": "color.border.field-invalid"
+        },
+        "helper": {
+          "color": "color.text.error"
+        },
+        "states": {
+          "focus": {
+            "control": {
+              "border-color": "color.border.field-invalid",
+              "outline-color": "color.border.error"
+            }
+          }
+        }
+      },
+      "false": {
+        "control": {}
+      }
+    }
+  },
+  "contrast": [
+    {
+      "fg": "color.text.tertiary",
+      "bg": "color.bg.canvas"
+    },
+    {
+      "fg": "color.border.field",
+      "bg": "color.bg.field",
+      "min": 3
+    }
+  ],
+  "requirements": [
+    "requirements/general.md",
+    "requirements/input.a11y.md"
+  ],
+  "examples": [
+    {
+      "name": "Email de contacto",
+      "props": {
+        "label": "Correo de trabajo",
+        "name": "email",
+        "type": "email",
+        "helper": "Te escribiremos solo para esta demo."
+      }
+    },
+    {
+      "name": "Error",
+      "props": {
+        "label": "Correo de trabajo",
+        "name": "email",
+        "invalid": true,
+        "helper": "Escribe un correo con el formato nombre@empresa.com"
+      }
+    }
+  ]
+}

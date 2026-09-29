@@ -1,0 +1,12 @@
+---
+// Scaffold sobre specs/components/badge.spec.json
+import { badge, type BadgeContract } from './generated';
+
+interface Props extends BadgeContract {
+  class?: string;
+}
+const { class: extensions } = Astro.props;
+const c = badge(Astro.props);
+---
+
+<span class:list={[c.root, extensions]}><slot /></span>

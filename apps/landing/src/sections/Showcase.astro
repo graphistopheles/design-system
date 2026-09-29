@@ -1,0 +1,75 @@
+---
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
+import Input from '../components/Input.astro';
+import SectionIntro from './SectionIntro.astro';
+import { buttonMeta, badgeMeta, inputMeta, buttonStyles, badgeStyles } from '../components/generated';
+import { copy } from '@ds-ia/tokens/tokens';
+
+const variants = buttonStyles.variants.variant;
+const categories = ['terracota', 'cyan', 'gold', 'discovery', 'prototype', 'validation', 'handoff'] as const;
+// Las etiquetas de los botones salen de los tokens de voz y tono (copy.action.*)
+const actions = [
+  { variant: 'primary', label: copy.action.save },
+  { variant: 'secondary', label: copy.action.confirm },
+  { variant: 'outline', label: copy.action.cancel },
+  { variant: 'ghost', label: copy.action.cancel },
+  { variant: 'destructive', label: copy.action.delete },
+] as const;
+const blocks = [buttonMeta, badgeMeta, inputMeta];
+---
+
+<section class="mx-auto max-w-content px-inset-lg py-inset-2xl flex flex-col gap-stack-xl" aria-labelledby="componentes">
+  <SectionIntro id="componentes" eyebrow="Componentes vivos" title="Renderizados desde el contrato">
+    Cada componente de esta página se arma con las clases generadas desde su spec. Las etiquetas de los botones vienen de los tokens de copy.
+  </SectionIntro>
+
+  <div class="grid gap-stack-lg lg:grid-cols-3">
+    <div class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex flex-col gap-stack-md lg:col-span-2">
+      <div class="flex items-center justify-between gap-inline-md">
+        <h3 class="text-heading-h5 text-primary">Button</h3>
+        <code class="font-code text-caption-1 text-tertiary">{blocks[0].spec} · v{blocks[0].version}</code>
+      </div>
+      <div class="flex flex-wrap gap-inline-md">
+        {actions.map((a) => <Button variant={a.variant}>{a.label}</Button>)}
+        <Button disabled>{copy.state.loading}</Button>
+      </div>
+      <div class="flex flex-wrap items-center gap-inline-md">
+        <Button size="sm" variant="outline">Pequeño</Button>
+        <Button>Mediano</Button>
+        <Button size="lg">Grande</Button>
+      </div>
+      <p class="text-body-4 text-tertiary">{Object.keys(variants).length} variantes · 3 tamaños · estados hover, active, focus-visible y disabled.</p>
+    </div>
+
+    <div class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex flex-col gap-stack-md">
+      <div class="flex items-center justify-between gap-inline-md">
+        <h3 class="text-heading-h5 text-primary">Input</h3>
+        <code class="font-code text-caption-1 text-tertiary">v{blocks[2].version}</code>
+      </div>
+      <Input label="Nombre del token" name="demo-token" placeholder="color/bg/fill-primary" helper="Usa la fórmula type/element/role." />
+      <Input label="Valor" name="demo-value" placeholder="{brand.500}" invalid helper="Escribe un alias, por ejemplo {brand.500}. Un valor hex no es un semántico." />
+    </div>
+
+    <div class="rounded-surface border border-subtle bg-surface-subtle p-inset-lg flex flex-col gap-stack-md lg:col-span-3">
+      <div class="flex items-center justify-between gap-inline-md">
+        <h3 class="text-heading-h5 text-primary">Badge</h3>
+        <code class="font-code text-caption-1 text-tertiary">{blocks[1].spec} · v{blocks[1].version} · {badgeStyles.compounds.length} combinaciones</code>
+      </div>
+      <div class="flex flex-wrap items-center gap-inline-sm">
+        <Badge>Neutral</Badge>
+        <Badge tone="success">Validado</Badge>
+        <Badge tone="success" emphasis="solid">Publicado</Badge>
+        <Badge tone="error">Rechazado</Badge>
+        <Badge tone="error" emphasis="solid">Bloqueante</Badge>
+      </div>
+      <div class="flex flex-wrap items-center gap-inline-sm">
+        {categories.map((c) => <Badge tone="category" category={c}>{c}</Badge>)}
+      </div>
+      <div class="flex flex-wrap items-center gap-inline-sm">
+        {categories.map((c) => <Badge tone="category" category={c} emphasis="solid">{c}</Badge>)}
+      </div>
+      <p class="text-body-4 text-tertiary">Feedback significa correcto o incorrecto; las categorías solo clasifican. Nunca el rojo de error para decorar.</p>
+    </div>
+  </div>
+</section>
